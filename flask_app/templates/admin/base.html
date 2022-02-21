@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block base_content %}
+{% include 'admin/components/top_navbar.html' %}
+<div class="grid grid-cols-12 h-full">
+    <div class="col-span-2 text-main-sunglow h-full">
+        {% include 'admin/components/side_navbar.html' %}
+    </div>
+    {% block content %}
+
+    {% endblock content %}
+</div>
+
+{% endblock base_content %}

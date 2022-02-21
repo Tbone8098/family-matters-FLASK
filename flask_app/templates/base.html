@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/main/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block base_css %}
+
+    {% endblock base_css %}
+    <title>Family Matters</title>
+</head>
+
+<body>
+    <div class="flex flex-col h-screen">
+        {% block base_content %}
+        
+        {% endblock base_content %}
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block base_js %}
+
+    {% endblock base_js %}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'main': {
+                            "charcoal": "#233D4D",
+                            "pumpkin": "#FE7F2D",
+                            "sunglow": "#FCCA46",
+                            "olivine": "#A1C181",
+                            "pine": "#619B8A",
+                        },
+                        "blog": {
+                            "cornflower": "#8ECAE6",
+                            "blueGreen": "#219EBC",
+                            "prussianBlue": "#023047",
+                            "honeyYellow": "#FFB703",
+                            "orange": "#FB8500",
+                        },
+                        'refit': {
+                            "yellow": "yellow",
+                            "blue": "#4D76D1",
+                        },
+                        'webworkx': {
+                            'umber': '#6C584C',
+                            'cafe': '#A98467',
+                            'green': '#ADC178',
+                            'pale': '#DDE5B6',
+                            'eggshell': '#F0EAD2',
+                        }
+                    },
+                    fontFamily: {
+                        'league': ["'league spartan'"],
+                        'glacial': ['glacial-indifference'],
+                        'northwell': ['northwell']
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
