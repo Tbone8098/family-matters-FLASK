@@ -1,0 +1,41 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="col-span-10">
+    <div class="text-center">
+        <h1 class="text-5xl">Pages</h1>
+        <div>
+            <input type="text" name="name" id="name" class="onChangeEl" clear="true" url="/api/page/create" placeholder="New Page">
+        </div>
+    </div>
+    <div>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Created by</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="page_table_body">
+                {% for page in all_pages %}
+                    <tr>
+                        <td>{{ page.name }}</td>
+                        <td>{{ page.author }}</td>
+                        <td>{{ page.created_at }}</td>
+                        <td>
+                            <a href="/page/{{page.id}}/edit">Edit</a>
+                            <a class="text-danger" href="/page/{{page.id}}/delete">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/page.js') }}"></script>
+{% endblock js %}

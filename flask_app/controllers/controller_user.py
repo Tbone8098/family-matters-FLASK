@@ -37,6 +37,7 @@ def create_user():
 
     id = model_user.User.create(**data)
     session['uuid'] = id
+    session['user_name'] = f"{request.form['first_name']} {request.form['last_name']}"
 
     return redirect('/')
 

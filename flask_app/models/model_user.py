@@ -14,6 +14,10 @@ class User(model_base.base_model):
         self.last_name = data['last_name']
         self.pw = data['pw']
         self.email = data['email']
+        self.fullname = f"{self.first_name} {self.last_name}"
+
+    def __repr__(self) -> str:
+        return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
 
     @staticmethod
     def validation(data):
@@ -74,5 +78,6 @@ class User(model_base.base_model):
                 is_valid = False
             else:
                 session['uuid'] = potential_user.id
+                session['user_name'] = potential_user.fullname
 
         return is_valid

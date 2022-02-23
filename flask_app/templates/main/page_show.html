@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <h1>{{ page.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-full">
+                {% for block in page.blocks %}
+                    <div class="mb-3">
+                        {{ block.content | safe }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

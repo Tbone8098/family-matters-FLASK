@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="row m-0 h-100">
+    <div class="col-2">
+        <h3 class="underline">Mini Menu</h3>
+        <ul>
+            <li class="clickable ul__menu onChangeEl menu-item" url="/api/block/content/create" type="content" page_id="{{page.id}}">Add Content</li>
+            <li class="clickable ul__menu onChangeEl menu-item" url="/api/block/image/create" type="images" page_id="{{page.id}}">Add Images</li>
+        </ul>
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="d-flex justify-content-end gap-3">
+                <a href="/page/{{page.id}}" target="_blank" class="btn bg__sunglow">View Page</a>
+                <a href="#" class="btn btn-danger">Delete Page</a>
+            </div>
+        </div>
+        <div class="row border my-2">
+            <h2 class="text-center text-3xl mt-3">
+                <input class="onChangeEl" url="/api/page/{{page.id}}/update" type="text" name="name" id="name" value="{{ page.name }}">
+            </h2>
+            <div class="block_area">
+                {% for block in page.blocks %}
+                <div class="m-3">
+                    <textarea class="onChangeEl" url="/api/block/content/{{block.id}}/update" name="content" id="content" cols="30" rows="10">{{ block.content }}</textarea>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/page.js') }}"></script>
+{% endblock js %}

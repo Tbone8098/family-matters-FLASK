@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="col-span-10">
+    <div>
+        <h2 class="text-5xl">New Page</h2>
+    </div>
+    <div>
+        <form action="/page/create" method="post">
+            <input type="text" name="name" id="name" placeholder="Page Name">
+            {% for message in get_flashed_messages(category_filter=["err_page_name"]) %}
+            <p class="alert alert-danger">{{ message }}</p>
+            {% endfor %}
+            <button class="btn">Create Page</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
