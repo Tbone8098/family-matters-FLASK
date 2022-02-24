@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% block base_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    {% block css %}
+        
+    {% endblock css %}
+{% endblock base_css %}
+
 {% block base_content %}
 <div class="row m-0">
     {% include 'admin/components/top_navbar.html' %}
@@ -9,9 +16,11 @@
         {% include 'admin/components/side_navbar.html' %}
     </div>
     <div class="col-10">
-        {% block content %}
-        
-        {% endblock content %}
+        <div class="content__area">
+            {% block content %}
+            
+            {% endblock content %}
+        </div>
     </div>
 </div>
 {% endblock base_content %}

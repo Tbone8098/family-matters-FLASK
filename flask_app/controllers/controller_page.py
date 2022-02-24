@@ -65,6 +65,7 @@ def edit_page(id):
 
 @app.route('/page/<int:id>/update', methods=['post'])
 def update_page(id):
+    print(request.form)
 
     if not model_page.Page.validation(request.form):
         return redirect('/')
@@ -72,10 +73,11 @@ def update_page(id):
     data = {
         **request.form
     }
+    del data['files']
 
-    model_page.Page.update_one(id=id, **data)
+    model_page.Page.update_one(id=id, **data, user_id=session['uuid'])
 
-    pass 
+    return redirect(f'/page/{id}/edit')
 
 @app.route('/api/page/<int:id>/update', methods=['post'])
 def api_update_page(id):

@@ -5,8 +5,8 @@ function updatePage(data) {
     <tr>
         <td>${data['name']}</td>
         <td>
-            <a href="/category/${data['id']}/edit">Edit</a>
-            <a class="text-danger" href="/category/${data['id']}/delete">Delete</a>
+            <a class="m-0 btn bg__pine" href="/category/${data['id']}/edit">Edit</a>
+            <a class="m-0 btn btn-danger" href="/category/${data['id']}/delete">Delete</a>
         </td>
     </tr>
     `

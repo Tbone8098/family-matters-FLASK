@@ -12,6 +12,7 @@ class Page(model_base.base_model):
         self.name = data['name']
         self.user_id = data['user_id']
         self.is_public = data['is_public']
+        self.content = data['content']
 
     @property
     def author(self):

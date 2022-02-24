@@ -1,0 +1,5 @@
+.content__area {
+    padding: 1em;
+    height: 90vh;
+    overflow-x: auto;
+}
