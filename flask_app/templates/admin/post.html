@@ -1,0 +1,50 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="row text-center">
+    <h1 class="text-5xl">Posts</h1>
+    <div>
+        <form class="d-flex justify-content-center align-items-center gap-3" action="/post/create" method="post">
+            <div>
+                <input class="form-control" type="text" name="name" id="name" placeholder="New Post">
+            </div>
+            <div>
+                <select class="form-select" name="category_id" id="category_id">
+                    {% for category in all_categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-success">Create Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="post_table_body">
+            {% for post in all_posts %}
+            <tr>
+                <td>{{ post.page.name }}</td>
+                <td>{{ post.page.author }}</td>
+                <td>{{ post.category.name }}</td>
+                <td class="w-25">
+                    <a class="m-0 txt__olivine btn bg__charcoal" href="/page/{{post.page_id}}" target="blank">View</a>
+                    <a class="m-0 btn bg__pine" href="/post/{{post.id}}/edit">Edit</a>
+                    <a class="m-0 btn btn-danger" href="/post/{{post.id}}/delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

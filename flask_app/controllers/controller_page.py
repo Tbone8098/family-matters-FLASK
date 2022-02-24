@@ -6,7 +6,7 @@ from flask_app.models import model_page, model_user
 @app.route('/pages')
 def page():
     context = {
-        'all_pages': model_page.Page.get_all()
+        'all_pages': model_page.Page.get_all(is_post=0)
     }
     return render_template('admin/page.html', **context)
 

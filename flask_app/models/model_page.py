@@ -11,6 +11,7 @@ class Page(model_base.base_model):
         super().__init__(data)
         self.name = data['name']
         self.user_id = data['user_id']
+        self.is_public = data['is_public']
 
     @property
     def author(self):

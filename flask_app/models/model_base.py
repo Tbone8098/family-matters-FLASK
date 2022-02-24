@@ -42,9 +42,15 @@ class base_model:
 # R ************************************************
 
     @classmethod
-    def get_all(cls):
-        query = f'SELECT * FROM {cls.table}'
-        results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
+    def get_all(cls, **data):
+        if not data:
+            query = f'SELECT * FROM {cls.table}'
+            results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
+        else: 
+            str = cls.sanitize(**data, paired=True)
+            query = f'SELECT * FROM {cls.table} WHERE {str};'
+            results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
+
         if results:
             all_table_name = []
             for table_name in results:

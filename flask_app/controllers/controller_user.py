@@ -4,6 +4,8 @@ from flask_app.models import model_user
 
 @app.route('/login')
 def login():
+    if 'uuid' in session:
+        return redirect('/dashboard')
     return render_template('admin/login.html')
 
 @app.route('/logout')
@@ -13,6 +15,8 @@ def logout():
 
 @app.route('/register')
 def register():
+    if 'uuid' in session:
+        return redirect('/dashboard')
     return render_template('/admin/register.html')
 
 @app.route('/user/process_login', methods=['post'])

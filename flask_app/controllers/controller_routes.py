@@ -4,8 +4,6 @@ from flask_app.models import model_user
 
 @app.route('/')
 def index():
-    if 'uuid' in session:
-        return redirect('/dashboard')
     session['page'] = 'landing page'
     return render_template('main/index.html')
 
