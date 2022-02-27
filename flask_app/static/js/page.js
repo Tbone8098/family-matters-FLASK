@@ -47,8 +47,8 @@ function updatePage(data) {
         <td>${data['author']}</td>
         <td>now</td>
         <td>
-            <a href="/page/${data['id']}/edit">Edit</a>
-            <a class="text-danger" href="/page/${data['id']}/delete">Delete</a>
+            <a class="m-0 btn bg__pine" href="/page/${data['id']}/edit">Edit</a>
+            <a class="m-0 btn btn-danger" href="/page/${data['id']}/delete">Delete</a>
         </td>
     </tr>
     `

@@ -1,3 +1,20 @@
+// Summernote
+var allTextAreas = document.querySelectorAll('.summernote')
+for (const element of allTextAreas) {
+    $(element).summernote()
+    console.log(typeof element);
+}
+
+// summernote save
+var summernoteForms = document.querySelectorAll('.summernote-form')
+for (const formEl of summernoteForms) {
+    formEl.addEventListener('submit', function (e) {
+        e.preventDefault()
+        form = new FormData(formEl)
+        updateElement(formEl, form)
+    })
+}
+
 var onChangeEl = document.querySelectorAll('.onChangeEl')
 
 if (onChangeEl.length > 0) {
@@ -11,9 +28,11 @@ if (onChangeEl.length > 0) {
     }
 }
 
-function updateElement(el) {
-    let form = new FormData()
-    form.append(el.id, el.value)
+function updateElement(el, form = null) {
+    if (!form){
+        form = new FormData()
+        form.append(el.id, el.value)
+    }
     let url = el.getAttribute('url')
 
     fetch(url, {
