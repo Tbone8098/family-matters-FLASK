@@ -1,0 +1,72 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="row m-0 h-100">
+    <div class="col-12 h-100">
+        <div class="border my-2 p-3">
+            <form action="/post/{{post.id}}/update" method="post">
+                <div class="row d-flex align-items-center my-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="w-25">
+                            <label class="text-center" for="name">Post Name</label>
+                            <input class="form-control" type="text" name="name" id="name" value="{{post.name}}">
+                        </div>
+                        <div class="w-25 d-flex flex-column gap-1">
+                            <div>
+                                <input type="checkbox" name="is_featured" id="is_featured"
+                                class="form-check-input onChangeEl" value="{{1 if not post.is_featured else 0}}"
+                                url="/api/post/{{post.id}}/update" {{'checked' if post.is_featured else '' }}>
+                                <label for="is_featured">Featured</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
+                                value="{{1 if not post.is_public else 0}}" url="/api/post/{{post.post_id}}/update"
+                                {{'checked' if post.is_public else '' }}>
+                                <label for="is_public">Publish</label>
+                            </div>
+                        </div>
+                        <div class="w-25">
+                            <label for="category_id">Category</label>
+                            <select class="form-select onChangeEl" name="category_id" id="category_id"
+                                url="/api/post/{{post.id}}/update">
+                                {% set currentCategory = post.category %}
+                                <option value="{{ currentCategory.id }}">{{ currentCategory.name }}</option>
+                                {% for category in all_categories %}
+                                {% if not currentCategory.id == category.id %}
+                                <option value="{{category.id}}">{{ category.name }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="w-25">
+                            <label for="cover_picture">Cover Picture</label>
+                            <input class="form-control onChangeEl" url="/api/post/{{post.id}}/update" type="text"
+                                name="cover_picture" id="cover_picture" placeholder="Cover Picture URL"
+                                value="{{ post.cover_picture if post.cover_picture != None else '' }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="w-75 mt-3">
+                            <textarea class="form-control onChangeEl" url="/api/post/{{post.id}}/update" name="synopsis"
+                                id="synopsis" cols="30" rows="3" placeholder="Synopsis"
+                                max=255>{{ post.synopsis if post.synopsis != None else '' }}</textarea>
+                        </div>
+                        <div class="w-25 d-flex justify-content-end align-items-center gap-1">
+                            <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
+                            <a href="/post/{{post.id}}" target="_blank" class="btn bg__sunglow my-1">View Post</a>
+                            <a href="/post/{{post.id}}/delete" class="btn btn-danger my-1">Delete Post</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <textarea class="summernote" name="content" id="content" cols="30"
+                        rows="10">{{post.content | safe}}</textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/page.js') }}"></script>
+{% endblock js %}

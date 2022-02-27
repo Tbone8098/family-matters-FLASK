@@ -1,0 +1,75 @@
+{% extends 'main/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/life_on_the_road.css') }}">
+<style>
+    /* .carousel__wrapper > *  {
+        border: 1px solid black;
+    } */
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="row">
+    <h1 class="text-center">Life on the road</h1>
+</div>
+<div class="row d-flex justify-content-center">
+    <div class="col-6">
+        <div class="carousel__wrapper  d-flex justify-content-center">
+            <div class="carousel__btns clickable bg__charcoal txt__pumpkin" id="prev">
+                <span>Prev</span>
+            </div>
+            <div class="carousel__base__container">
+                {% for post in all_featured_posts %}
+                <div class="carousel__container {{'active' if loop.index == 1 else ''}}">
+                    <div class="carousel__image d-flex justify-content-center">
+                        <img src="{{ post.cover_picture }}" height="500px">
+                    </div>
+                    <div class="carousel__text row d-flex justify-content-center">
+                        <div class="w-75">
+                            <h2>{{ post.name }}</h2>
+                            <p>{{ post.synopsis }}</p>
+                        </div>
+                        <div class="w-100 row">
+                            <a class="btn bg__charcoal txt__sunglow" href="/post/{{ post.id }}">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="carousel__btns clickable bg__charcoal txt__pumpkin" id="next">
+                <span>Next</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row text-center justify-content-center">
+    <div class="col-9 d-flex justify-content-between gap-3">
+        <div class="category__name d-flex gap-3">
+            {% for category in all_categories %}
+            <h3 class="category-name clickable category_picker {{ 'active' if loop.index == 1 else '' }} " category_id="{{category.id}}">{{category.name.upper()}}</h3>
+            {% endfor %}
+        </div>
+        <a href="" class="btn bg__charcoal txt__sunglow">View All</a>
+    </div>
+</div>
+<div class="row d-flex justify-content-center">
+    <div class="col-9 category__container" id="post-container">
+        {% for post in all_posts %}
+        <div class="post__container">
+            <h1 class="text-center">{{ post.name }}</h1>
+            <img src="{{ post.cover_picture }}">
+            <a class="btn bg__charcoal txt__sunglow w-100" href="/post/{{ post.id }}">View More</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/life_on_the_road.js') }}"></script>
+<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+{% endblock js %}
+
+<!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione minima ab, nihil cupiditate at obcaecati rerum magnam repellendus, quis, culpa eum maxime animi voluptatum eveniet totam ipsam voluptatibus quasi incidunt! -->

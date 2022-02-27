@@ -39,3 +39,27 @@ li > a {
     color: unset;
     text-decoration: none;
 }
+
+
+/* font size */
+.txt__xs {
+    font-size: 0.64rem;
+}
+.txt__sm {
+    font-size: 0.8rem;
+}
+.txt__md {
+    font-size: 1.25rem;
+}
+.txt__lg {
+    font-size: 1.563rem;
+}
+.txt__xl {
+    font-size: 1.953rem;
+}
+.txt__2xl {
+    font-size: 2.441rem;
+}
+.txt__3xl {
+    font-size: 3.052rem;
+}

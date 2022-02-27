@@ -1,0 +1,19 @@
+.carousel__base__container > * {
+    display: none;
+}
+
+.carousel__base__container > .active {
+    display: block;
+}
+
+.carousel__image > img {
+    border: 2px solid black;
+    
+}
+
+.carousel__wrapper > .carousel__btns {
+    margin: 0 1em;
+    padding: 0 1em;
+    display: flex;
+    align-items: center;
+}

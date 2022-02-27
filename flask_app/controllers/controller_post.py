@@ -14,24 +14,15 @@ def post_new():
 
 @app.route('/post/create', methods=['POST'])          
 def post_create():
-    # validate 
-    # create a new page
-    data = {
-        **request.form,
-        'is_post': 1
-    }
-    del data['category_id']
-    page_id = model_page.Page.create(**data, user_id=session['uuid'])
-    # create a new post
-    model_post.Post.create(page_id=page_id, category_id=request.form['category_id'])
-    return redirect('/posts')
+    id = model_post.Post.create(**request.form, user_id=session['uuid'])
+    return redirect(f'/post/{id}/edit')
 
 @app.route('/post/<int:id>')          
 def post_show(id):
     context = {
         'post': model_post.Post.get_one(id=id),
     }
-    return render_template('page_show.html', **context)
+    return render_template('main/post_show.html', **context)
 
 @app.route('/post/<int:id>/edit')          
 def post_edit(id):
@@ -39,19 +30,24 @@ def post_edit(id):
         'post': model_post.Post.get_one(id=id),
         'all_categories': model_category.Category.get_all()
     }
-    return render_template('admin/page_edit.html', **context)
+    return render_template('admin/post_edit.html', **context)
 
 @app.route('/post/<int:id>/update', methods=['POST'])          
 def post_update(id):
-    return redirect('/')
+    data ={**request.form}
+    del data['files']
+    model_post.Post.update_one(**data, id=id)
+    return redirect(f'/post/{id}/edit')
 
 @app.route('/api/post/<int:id>/update', methods=['POST'])          
 def api_post_update(id):
-    model_post.Post.update_one(**request.form, id=id)
+    data ={**request.form}
+    model_post.Post.update_one(**data, id=id)
     return jsonify(msg='success')
 
 
 
 @app.route('/post/<int:id>/delete')          
 def post_delete(id):
-    return redirect('/')
+    model_post.Post.delete_one(id=id)
+    return redirect('/posts')
