@@ -13,14 +13,13 @@
                         <div class="w-25 d-flex flex-column gap-1">
                             <div>
                                 <input type="checkbox" name="is_featured" id="is_featured"
-                                class="form-check-input onChangeEl" value="{{1 if not post.is_featured else 0}}"
-                                url="/api/post/{{post.id}}/update" {{'checked' if post.is_featured else '' }}>
+                                class="form-check-input" value="{{1 if post.is_featured == 0 else 0}}"
+                                {{'checked' if post.is_featured == 1 else '' }}>
                                 <label for="is_featured">Featured</label>
                             </div>
                             <div>
-                                <input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
-                                value="{{1 if not post.is_public else 0}}" url="/api/post/{{post.post_id}}/update"
-                                {{'checked' if post.is_public else '' }}>
+                                <input type="checkbox" name="is_public" id="is_public" class="form-check-input"
+                                value="{{1 if post.is_public == 0 else 0}}" {{'checked' if post.is_public == 1 else '' }}>
                                 <label for="is_public">Publish</label>
                             </div>
                         </div>

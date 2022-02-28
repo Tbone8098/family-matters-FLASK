@@ -82,3 +82,17 @@
 .txt__white {
     color: white;
 }
+
+/* REFIT COLORS */
+.bg__refit__blue {
+    background-color: #4D76D1;
+}
+.bg__refit__yellow {
+    background-color: yellow;
+}
+.txt__refit__blue {
+    color: #4D76D1;
+}
+.txt__refit__yellow {
+    color: yellow;
+}

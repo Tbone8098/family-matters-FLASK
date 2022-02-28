@@ -1,0 +1,100 @@
+{% extends 'main/base.html' %}
+
+{% block header %}
+{% include 'main/refit/header.html' %}
+{% include 'main/components/navbar.html' %}
+{% include 'main/refit/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+<div class="row">
+    <h1>REFIT on the ROAD</h1>
+</div>
+<div class="row">
+    <img src="{{ page.banner1_picture }}" alt="" class="m-0 p-0">
+</div>
+<div class="row bg__black txt__white py-3 mt-3">
+    <p class="d-flex justify-content-end mb-0">EVERY <span class="txt__refit__yellow mx-1">BODY</span> BELONGS</p>
+</div>
+<div class="row">
+    <h2>About REFIT</h2>
+    <p>REFIT® is a total body fitness format, including cardio, balance, flexibility and toning. We put the fun in
+        fitness and unite people across the country and around the globe through the international language of dance!
+    </p>
+    <a href="https://refitrev.com/">Visit the official REFIT Website</a>
+</div>
+<div class="row">
+    <div class="bg__refit__blue p-3 my-3 col-12">
+        <h2 class="txt__white text-center w-100">Kendal's Class</h2>
+    </div>
+    {% if page.news %}
+    <div class="border">
+        <h3>News Update</h3>
+        {{ page.news | safe }}
+    </div>
+    {% endif %}
+
+    {% if page.schedule %}
+    <div>
+        {{ page.schedule | safe }}
+    </div>
+    {% endif %}
+    <div>
+        <h3>Spotify Playlist</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Song Name</th>
+                    <th>Artist</th>
+                    <th>Links</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in page.playlist.songs %}
+                    <tr>
+                        <td>{{ song.name }}</td>
+                        <td>{{ song.artist }}</td>
+                        <td>{{ song.link }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Spotify teaser here</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 md-col-6">
+        <img src="{{ page.loc_picture }}"
+            alt="refit class times" width="100%">
+    </div>
+    <div class="col-12 md-col-6">
+        {{ page.loc | safe }}
+    </div>
+    <div class="col-12 md-col-6">
+        {{ page.online_info | safe }}
+    </div>
+    <div class="col-12 md-col-6">
+        <img src="{{ page.zoom_picture }}"
+            alt="zoom image" width="100%">
+    </div>
+</div>
+<div class="row">
+    <img src="{{ page.banner2_picture }}"
+        alt="refit banner">
+</div>
+<div class="row">
+    <h2 id="about_me">About ME</h2>
+</div>
+<div class="row">
+    <div class="col-12 md-col-6">
+        <img src="{{ page.about_me_picture }}" alt="kendal" width="100%">
+    </div>
+    <div class="col-12 md-col-6">
+        {{ page.about_me | safe }}
+    </div>
+</div>
+
+
+{% endblock content %}
+
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat consequuntur sequi similique cupiditate distinctio! Aliquam molestias voluptatum aliquid ipsum accusantium, accusamus soluta laborum provident distinctio blanditiis? Rem ut quas quos.

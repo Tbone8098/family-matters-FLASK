@@ -34,8 +34,12 @@ def post_edit(id):
 
 @app.route('/post/<int:id>/update', methods=['POST'])          
 def post_update(id):
+    print("*****************")
+    print(request.form)
     data ={**request.form}
     del data['files']
+    print(data)
+    print("*****************")
     model_post.Post.update_one(**data, id=id)
     return redirect(f'/post/{id}/edit')
 
@@ -44,8 +48,6 @@ def api_post_update(id):
     data ={**request.form}
     model_post.Post.update_one(**data, id=id)
     return jsonify(msg='success')
-
-
 
 @app.route('/post/<int:id>/delete')          
 def post_delete(id):

@@ -10,28 +10,40 @@
                             <label class="text-center" for="name">Page Name</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{page.name}}">
                         </div>
-                        <div class="w-50 d-flex justify-content-evenly align-items-center">
+                        <div class="w-75 d-flex justify-content-evenly align-items-center">
                             <div class="w-25">
-                                <input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
-                                value="{{1 if not page.is_public else 0}}" url="/api/page/{{page.page_id}}/update"
-                                {{'checked' if page.is_public else '' }}>
+                                <input type="checkbox" name="is_public" id="is_public"
+                                    class="form-check-input onChangeEl" value="{{1 if not page.is_public else 0}}"
+                                    url="/api/page/{{page.page_id}}/update" {{'checked' if page.is_public else '' }}>
                                 <label for="is_public">Publish</label>
                             </div>
-                            <div class="w-75">
+                            <div class="">
                                 <label class="w-100 text-center" for="custom_url">URL</label>
-                                <input class="form-control" type="text" name="custom_url" id="custom_url" value="{{ page.custom_url }}">
+                                <input class="form-control" type="text" name="custom_url" id="custom_url"
+                                    value="{{ page.custom_url if page.custom_url != None else '' }}">
+                            </div>
+                            <div>
+                                <label class="w-100 text-center" for="cover_picture">Cover Picture</label>
+                                <input class="form-control" type="text" name="cover_picture" id="cover_picture"
+                                    value="{{ page.cover_picture if page.cover_picture != None else '' }}">
                             </div>
                         </div>
-                        <div class="w-25 d-flex justify-content-end align-items-center gap-1">
-                            <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
-                            <a href="/page/{{page.id}}" target="_blank" class="btn bg__sunglow my-1">View page</a>
-                            <a href="/page/{{page.id}}/delete" class="btn btn-danger my-1">Delete page</a>
+                        <div class="row">
+                            <div class="w-75 my-1">
+                                <textarea class="form-control" name="synopsis" id="synopsis" cols="30" rows="3"
+                                placeholder="Synopsis">{{ page.synopsis if page.synopsis != None else '' }}</textarea>
+                            </div>
+                            <div class="w-25 d-flex justify-content-end align-items-center gap-1">
+                                <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
+                                <a href="/page/{{page.id}}" target="_blank" class="btn bg__sunglow my-1">View page</a>
+                                <a href="/page/{{page.id}}/delete" class="btn btn-danger my-1">Delete page</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <textarea class="summernote" name="content" id="content" cols="30"
-                        rows="10">{{page.content | safe}}</textarea>
+                        rows="10">{{page.content | safe if page.content != None else '' }}</textarea>
                 </div>
             </form>
         </div>

@@ -10,15 +10,17 @@
 <!-- content -->
 {% block base_content %}
 <div class="mt-0">
+    {% block header %}
     {% include 'components/header.html' %}
     {% include 'main/components/navbar.html' %}
+    {% endblock header %}
 </div>
 <div class="mt-auto">
     {% block content %}
 
     {% endblock content %}
 </div>
-<div class="mt-auto">
+<div class="">
     {% include 'components/footer.html' %}
 </div>
 {% endblock base_content %}

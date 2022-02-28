@@ -57,6 +57,9 @@ def show_page(id=None, custom_url=None):
     else:
         page = model_page.Page.get_one(id = id)
 
+    if not page.is_public:
+        return redirect('/page_not_found')
+
     context = {
         'page': page
     }

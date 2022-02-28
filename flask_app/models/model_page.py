@@ -14,6 +14,8 @@ class Page(model_base.base_model):
         self.is_public = data['is_public']
         self.content = data['content']
         self.custom_url = data['custom_url']
+        self.cover_picture = data['cover_picture']
+        self.synopsis = data['synopsis']
 
     @property
     def author(self):
