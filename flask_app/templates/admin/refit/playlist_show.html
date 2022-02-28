@@ -1,0 +1,68 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="row">
+    <h1>{{ playlist.month.capitalize() }} {{ playlist.year }}</h1>
+</div>
+<div class="row">
+    <div class="col-10">
+        <div class="d-flex justify-content-between">
+            <h2>Current Songs In Playlist</h2>
+            <form action="/song/add" method="post" class="d-flex align-items-center gap-3">
+                <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
+                <div>
+                    <select name="song_id" id="song_id" class="form-select">
+                        {% for song in all_songs %}
+                            <option value="{{ song.id }}">{{ song.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button class="btn btn-success">Add Song</button>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Artist</th>
+                    <th>Link</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in playlist.songs %}
+                    <tr>
+                        <td>{{ song.name }}</td>
+                        <td>{{ song.artist }}</td>
+                        <td>{{ song.link }}</td>
+                        <td class="w-25">
+                            <a class="btn bg__sunglow m-0" href="/song/{{song.id}}/edit">Edit</a>
+                            <a class="btn btn-danger m-0" href="/song/{{song.id}}/remove">Remove</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-2">
+        <div>
+            <h2>Create a new Song</h2>
+            <form action="/song/create" method="post">
+                <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
+                <div class="mb-3">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="artist">Artist</label>
+                    <input class="form-control" type="text" name="artist" id="artist">
+                </div>
+                <div class="mb-3">
+                    <label for="link">YouTube Link</label>
+                    <input class="form-control" type="text" name="link" id="link">
+                </div>
+                <button class="btn btn-success">Create Song</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

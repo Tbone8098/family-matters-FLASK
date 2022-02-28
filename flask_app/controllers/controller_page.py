@@ -6,7 +6,7 @@ from flask_app.models import model_page, model_user
 @app.route('/pages')
 def page():
     context = {
-        'all_pages': model_page.Page.get_all(is_post=0)
+        'all_pages': model_page.Page.get_all()
     }
     return render_template('admin/page.html', **context)
 
@@ -49,10 +49,19 @@ def api_page_create():
     }
     return jsonify(msg)
 
+@app.route('/<custom_url>')
 @app.route('/page/<int:id>')
-def show_page(id):
+def show_page(id=None, custom_url=None):
+    if custom_url:
+        page = model_page.Page.get_one(custom_url = custom_url)
+    else:
+        page = model_page.Page.get_one(id = id)
+
+    if not page.is_public:
+        return redirect('/page_not_found')
+
     context = {
-        'page': model_page.Page.get_one(id=id)
+        'page': page
     }
     return render_template('main/page_show.html', **context)
 
@@ -65,18 +74,12 @@ def edit_page(id):
 
 @app.route('/page/<int:id>/update', methods=['post'])
 def update_page(id):
-    print(request.form)
-
-    if not model_page.Page.validation(request.form):
-        return redirect('/')
-
     data = {
         **request.form
     }
     del data['files']
 
     model_page.Page.update_one(id=id, **data, user_id=session['uuid'])
-
     return redirect(f'/page/{id}/edit')
 
 @app.route('/api/page/<int:id>/update', methods=['post'])

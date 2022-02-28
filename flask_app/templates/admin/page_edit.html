@@ -1,53 +1,49 @@
 {% extends 'admin/base.html' %}
-{% if post %}
-{% set page = post.page %}
-{% endif %}
 {% block content %}
 <div class="row m-0 h-100">
     <div class="col-12 h-100">
-        <div class="row">
-            <div class="d-flex w-100 justify-content-between align-items-center gap-3">
-                <div class="d-flex gap-5">
-                    {% if post %}
-                    <div class="d-flex align-items-center gap-1">
-                        <input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
-                            value="{{1 if not page.is_public else 0}}" url="/api/page/{{post.page_id}}/update"
-                            {{'checked' if page.is_public else '' }}>
-                        <span>Publish</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <label for="category_id">Category</label>
-                        <select class="form-select onChangeEl" name="category_id" id="category_id"
-                            url="/api/post/{{post.id}}/update">
-                            {% set currentCategory = post.category %}
-                            <option value="{{ currentCategory.id }}">{{ currentCategory.name }}</option>
-                            {% for category in all_categories %}
-                            {% if not currentCategory.id == category.id %}
-                            <option value="{{category.id}}">{{ category.name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-                    {% endif %}
-                </div>
-                <div>
-                    <a href="/page/{{page.id}}" target="_blank" class="btn bg__sunglow">View Page</a>
-                    <a href="#" class="btn btn-danger">Delete Page</a>
-                </div>
-            </div>
-        </div>
         <div class="border my-2 p-3">
             <form action="/page/{{page.id}}/update" method="post">
-                <div class="row my-3">
-                    <div class="col-10 d-flex justify-content-center">
-                        <input class="form-control w-25" type="text" name="name" id="name" value="{{page.name}}">
-                    </div>
-                    <div class="col-2 d-flex justify-content-center">
-                        <button class="btn bg__pine">Save</button>
+                <div class="row d-flex align-items-center my-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="w-25">
+                            <label class="text-center" for="name">Page Name</label>
+                            <input class="form-control" type="text" name="name" id="name" value="{{page.name}}">
+                        </div>
+                        <div class="w-75 d-flex justify-content-evenly align-items-center">
+                            <div class="w-25">
+                                <input type="checkbox" name="is_public" id="is_public"
+                                    class="form-check-input onChangeEl" value="{{1 if not page.is_public else 0}}"
+                                    url="/api/page/{{page.page_id}}/update" {{'checked' if page.is_public else '' }}>
+                                <label for="is_public">Publish</label>
+                            </div>
+                            <div class="">
+                                <label class="w-100 text-center" for="custom_url">URL</label>
+                                <input class="form-control" type="text" name="custom_url" id="custom_url"
+                                    value="{{ page.custom_url if page.custom_url != None else '' }}">
+                            </div>
+                            <div>
+                                <label class="w-100 text-center" for="cover_picture">Cover Picture</label>
+                                <input class="form-control" type="text" name="cover_picture" id="cover_picture"
+                                    value="{{ page.cover_picture if page.cover_picture != None else '' }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="w-75 my-1">
+                                <textarea class="form-control" name="synopsis" id="synopsis" cols="30" rows="3"
+                                placeholder="Synopsis">{{ page.synopsis if page.synopsis != None else '' }}</textarea>
+                            </div>
+                            <div class="w-25 d-flex justify-content-end align-items-center gap-1">
+                                <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
+                                <a href="/page/{{page.id}}" target="_blank" class="btn bg__sunglow my-1">View page</a>
+                                <a href="/page/{{page.id}}/delete" class="btn btn-danger my-1">Delete page</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <textarea class="summernote" name="content" id="content" cols="30" rows="10">{{page.content | safe}}</textarea>
+                <div class="row">
+                    <textarea class="summernote" name="content" id="content" cols="30"
+                        rows="10">{{page.content | safe if page.content != None else '' }}</textarea>
                 </div>
             </form>
         </div>
@@ -58,25 +54,3 @@
 {% block js %}
 <script src="{{ url_for('static', filename='js/page.js') }}"></script>
 {% endblock js %}
-
-
-<!-- <div class="row">
-    <div class="d-flex justify-content-center">
-        <h2 class="text-center mt-3 w-25">
-            <input class="onChangeEl form-control" url="/api/page/{{page.id}}/update" type="text" name="name" id="name"
-                value="{{ page.name }}">
-        </h2>
-    </div>
-</div>
-<div class="row">
-    <div class="block_area">
-        <div class="m-3">
-            <form class="summernote-form" url="/api/block/content/{{page.id}}/update">
-                <textarea class="summernote" name="content" cols="30" rows="10"></textarea>
-                <div class="d-flex justify-content-end">
-                    <button class="btn bg__pine">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->

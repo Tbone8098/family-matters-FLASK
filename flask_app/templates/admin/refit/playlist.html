@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<div class="row">
+    <h1>Playlists</h1>
+</div>
+<div class="row mb-3">
+    <form action="/playlist/create" method="post">
+        <div class="d-flex gap-3">
+            <select class="form-select" name="month" id="month">
+                {% for month in all_months %}
+                <option value="{{ month }}">{{ month.capitalize() }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-select" name="year" id="year">
+                {% for indx in range(10) %}
+                    <option value="{{ 2022 + indx}}">{{ 2022 + indx}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success m-0">Create</button>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for list in all_playlists %}
+            <tr>
+                <td>{{ list.month }}</td>
+                <td>{{ list.year }}</td>
+                <td>
+                    <a class="btn bg__pine" href="/playlist/{{ list.id }}/edit">Edit</a>
+                    <a class="btn btn-danger" href="/playlist/{{ list.id }}/delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

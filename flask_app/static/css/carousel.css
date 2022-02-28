@@ -1,0 +1,36 @@
+.carousel__base__container > * {
+    display: none;
+}
+
+.carousel__base__container > .active {
+    display: flex;
+    padding: 1.2em 1em 1em 1em;
+}
+
+.carousel__section {
+    margin: 1em;
+    border: 0.5em solid #FCCA46;
+    border-radius: 0 0 0.5em 0.5em;
+    background-color: white;
+}
+
+.carousel__image > img {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    
+}
+
+.carousel__wrapper > .carousel__btns {
+    margin: 0 1em;
+    padding: 0 1em;
+    display: flex;
+    align-items: center;
+}
+
+
+.carousel__paragraph{
+    max-height: 50px;
+    text-overflow: ellipsis;
+}

@@ -8,12 +8,14 @@ class Post(model_base.base_model):
     table = 'posts'
     def __init__(self, data):
         super().__init__(data)
-        self.page_id = data['page_id']
+        self.name = data['name']
         self.category_id = data['category_id']
-
-    @property
-    def page(self):
-        return model_page.Page.get_one(id=self.page_id)
+        self.cover_picture = data['cover_picture']
+        self.synopsis = data['synopsis']
+        self.is_featured = data['is_featured']
+        self.is_public = data['is_public']
+        self.user_id = data['user_id']
+        self.content = data['content']
 
     @property
     def category(self):

@@ -1,0 +1,92 @@
+{% extends 'main/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/life_on_the_road.css') }}">
+{% endblock css %}
+
+{% block content %}
+<div class="row d-flex justify-content-center mt-5">
+    <div class="col-6 d-flex justify-content-center">
+        <div class="pe-3">
+            <p>{{ about_us.synopsis }}</p>
+            <a class="btn bg__charcoal txt__sunglow" href="/about_us">Read More</a>
+        </div>
+        <img class="border" src="{{ about_us.cover_picture }}" alt="about us" width="200px">
+    </div>
+</div>
+<div class="row d-flex justify-content-center my-5 h-25 bg__charcoal">
+    <div class="col-1 h-100">
+        <div class="carousel__btns txt__charcoal h-100 d-flex align-items-center justify-content-center">
+            <img src="{{ url_for('static', filename='img/icon/backward.png') }}" class="clickable" id="prev">
+        </div>
+    </div>
+    <div class="col-6 carousel__section">
+        <div class="carousel__wrapper d-flex justify-content-center">
+            <div class="carousel__base__container ">
+                {% for post in all_featured_posts %}
+                <div class="carousel__container {{'active' if loop.index == 1 else ''}}">
+                    <div class="carousel__image d-flex justify-content-center">
+                        <a href="/post/{{ post.id }}">
+                            <img src="{{ post.cover_picture }}" height="300px">
+                        </a>
+                    </div>
+                    <div class="carousel__text row d-flex justify-content-center">
+                        <div class="w-75">
+                            <h2 class="text-center">{{ post.name }}</h2>
+                            <div class="carousel__paragraph">
+                                <p>{{ post.synopsis }}</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn bg__charcoal txt__sunglow" href="/post/{{post.id}}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex justify-content-center gap-3">
+                {% for post in all_featured_posts %}
+                <span>O</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-1 h-100">
+        <div class="carousel__btns txt__charcoal h-100 d-flex align-items-center justify-content-center">
+            <img src="{{ url_for('static', filename='img/icon/forward.png') }}" class="clickable" id="next">
+        </div>
+    </div>
+</div>
+<div class="row mx-0 d-flex justify-content-center">
+    <div class="col-8 ">
+        {% for category in all_categories %}
+        {% if category.posts | length > 0 %}
+        <div class="row text-center bg__charcoal txt__sunglow">
+            <h2>{{ category.name }}</h2>
+        </div>
+        <div class="row category__container mb-3">
+            {% for post in category.posts %}
+            {% if post.is_public %}
+            {% if loop.index < 5 %} <div class="post__container">
+                <a href="/post/{{post.id}}">
+                    <img src="{{ post.cover_picture }}">
+                </a>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/life_on_the_road.js') }}"></script>
+<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+{% endblock js %}
+
+<!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione minima ab, nihil cupiditate at obcaecati rerum magnam repellendus, quis, culpa eum maxime animi voluptatum eveniet totam ipsam voluptatibus quasi incidunt! -->

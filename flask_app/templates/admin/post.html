@@ -28,16 +28,26 @@
                 <th>Author</th>
                 <th>Category</th>
                 <th>Date</th>
+                <th>Featured</th>
+                <th>Published</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="post_table_body">
             {% for post in all_posts %}
             <tr>
-                <td>{{ post.page.name }}</td>
-                <td>{{ post.page.author }}</td>
+                <td>{{ post.name }}</td>
+                <td>{{ post.author }}</td>
                 <td>{{ post.category.name }}</td>
-                <td class="w-25">
-                    <a class="m-0 txt__olivine btn bg__charcoal" href="/page/{{post.page_id}}" target="blank">View</a>
+                <td>{{ post.created_at }}</td>
+                <td class="text-center"> <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input onChangeEl"
+                    value="{{1 if not post.is_featured else 0}}" url="/api/post/{{post.id}}/update" {{'checked'
+                    if post.is_featured else '' }}></td>
+                <td class="text-center"><input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
+                    value="{{1 if not post.is_public else 0}}" url="/api/post/{{post.id}}/update"
+                    {{'checked' if post.is_public else '' }}></td>
+                <td class="w-0 d-flex justify-content-center gap-1">
+                    <a class="m-0 txt__olivine btn bg__charcoal" href="/post/{{post.id}}" target="blank">View</a>
                     <a class="m-0 btn bg__pine" href="/post/{{post.id}}/edit">Edit</a>
                     <a class="m-0 btn btn-danger" href="/post/{{post.id}}/delete">Delete</a>
                 </td>

@@ -24,7 +24,7 @@ def process_login():
     if not model_user.User.validation_login(request.form):
         return redirect('/login')
 
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/user/create', methods=['post'])
 def create_user():
@@ -43,7 +43,7 @@ def create_user():
     session['uuid'] = id
     session['user_name'] = f"{request.form['first_name']} {request.form['last_name']}"
 
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/user/<int:id>')
 def show_user(id):

@@ -1,6 +1,6 @@
 from flask_app import app, bcrypt
 from flask import render_template, redirect, request, session, flash, jsonify
-from flask_app.models import model_category, model_user
+from flask_app.models import model_category, model_post
 
 
 @app.route('/categories')
@@ -42,9 +42,13 @@ def api_create_category():
     }
     return jsonify(msg)
 
-@app.route('/category/<int:id>')
+@app.route('/api/category/<int:id>')
 def show_category(id):
-    pass 
+    all_posts = model_post.Post.get_all_serialized(category_id=id, is_public=1)
+    msg = {
+        'content': all_posts
+    }
+    return jsonify(msg)
 
 @app.route('/category/<int:id>/edit')
 def edit_category(id):

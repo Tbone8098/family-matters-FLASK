@@ -4,31 +4,31 @@
     <div class="d-flex h-100 justify-content-center align-items-center">
         <form action="user/create" method="post">
             <div class="mb-3">
-                <input class="w-100" type="text" name="first_name" id="first_name" placeholder="First Name">
+                <input class="w-100" type="text" name="first_name" id="first_name" placeholder="First Name" value="tyelr">
                 {% for message in get_flashed_messages(category_filter=["err_user_first_name"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}
             </div>
             <div class="mb-3">
-                <input class="w-100" type="text" name="last_name" id="last_name" placeholder="Last Name">
+                <input class="w-100" type="text" name="last_name" id="last_name" placeholder="Last Name" value="tbo">
                 {% for message in get_flashed_messages(category_filter=["err_user_last_name"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}
             </div>
             <div class="mb-3">
-                <input class="w-100" type="text" name="email" id="email" placeholder="Email">
+                <input class="w-100" type="text" name="email" id="email" placeholder="Email" value="tt@email.com">
                 {% for message in get_flashed_messages(category_filter=["err_user_email"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}
             </div>
             <div class="mb-3">
-                <input class="w-100" type="text" name="pw" id="pw" placeholder="Password">
+                <input class="w-100" type="text" name="pw" id="pw" placeholder="Password" value="Thibault">
                 {% for message in get_flashed_messages(category_filter=["err_user_pw"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}
             </div>
             <div class="mb-3">
-                <input class="w-100" type="text" name="confirm_pw" id="confirm_pw" placeholder="Confirm Password">
+                <input class="w-100" type="text" name="confirm_pw" id="confirm_pw" placeholder="Confirm Password" value="Thibault">
                 {% for message in get_flashed_messages(category_filter=["err_user_confirm_pw"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}
