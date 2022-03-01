@@ -3,7 +3,7 @@ import pymysql.cursors
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'localhost',
+        connection = pymysql.connect(host = 'eanl4i1omny740jw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
                                     user = 'tsb8ie9awn4a20i3', # change the user and password as needed
                                     password = 'e3smu6va1pouee40', 
                                     db = db,
