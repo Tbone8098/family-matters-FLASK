@@ -27,20 +27,16 @@
 </head>
 
 <body>
-    <div class="container-fluid base__container d-flex flex-column">
-        <div class="">
-            {% block base_header %}
-            {% include 'components/header.html' %}
-            {% endblock base_header %}
-        </div>
-        <div class="h-100">
-            {% block base_content %}
-            {% endblock base_content %}
-        </div>
-        <div class="">
-            {% block base_footer %}
-            {% endblock base_footer %}
-        </div>
+    <div class="container-fluid base__container d-flex flex-column vh-100">
+        {% block base_header %}
+        {% endblock base_header %}
+
+        {% block base_content %}
+        {% endblock base_content %}
+
+        {% block base_footer %}
+        {% endblock base_footer %}
+
     </div>
 
 

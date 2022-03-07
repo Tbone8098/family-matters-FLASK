@@ -18,10 +18,10 @@
         </thead>
         <tbody id="category_table_body">
             {% for category in all_categories %}
-            <tr>
+            <tr id="{{category.id}}">
                 <td>{{ category.name }}</td>
                 <td>
-                    <a class="m-0 no__a btn bg__pine" href="/category/{{category.id}}/edit">Edit</a>
+                    <span class="m-0 no__a btn bg__pine edit__btn" category_id="{{category.id}}">Edit</span>
                     <a class="m-0 btn btn-danger" href="/category/{{category.id}}/delete">Delete</a>
                 </td>
             </tr>
