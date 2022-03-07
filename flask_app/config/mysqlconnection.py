@@ -4,13 +4,13 @@ import pymysql.cursors
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(
-            # host = 'eanl4i1omny740jw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-            # user = 'tsb8ie9awn4a20i3',
-            # password = 'e3smu6va1pouee40', 
+            host = 'eanl4i1omny740jw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            user = 'tsb8ie9awn4a20i3',
+            password = 'e3smu6va1pouee40', 
 
-            host = 'localhost',
-            user = 'root',
-            password = 'root', 
+            # host = 'localhost',
+            # user = 'root',
+            # password = 'root', 
 
 
             db = db,
