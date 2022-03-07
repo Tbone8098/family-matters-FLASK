@@ -8,22 +8,35 @@
 {% endblock base_css %}
 
 <!-- content -->
-{% block base_content %}
-<div class="mt-0">
-    {% block header %}
-    {% include 'components/header.html' %}
-    {% include 'main/components/navbar.html' %}
-    {% endblock header %}
-</div>
-<div class="mt-auto">
-    {% block content %}
+{% block base_header %}
 
+{% block header %}
+<div class="row">
+    {% include 'components/header.html' %}
+</div>
+<div class="row">
+    {% include 'main/components/navbar.html' %}
+</div>
+{% endblock header %}
+
+{% endblock base_header %}
+
+{% block base_content %}
+
+<div class="row">
+    {% block content %}
+    
     {% endblock content %}
 </div>
-<div class="">
+
+{% endblock base_content %}
+
+
+{% block base_footer %}
+<div class="row">
     {% include 'components/footer.html' %}
 </div>
-{% endblock base_content %}
+{% endblock base_footer %}
 
 <!-- js -->
 {% block base_js %}

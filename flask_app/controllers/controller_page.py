@@ -5,6 +5,7 @@ from flask_app.models import model_page, model_user
 
 @app.route('/pages')
 def page():
+    session['page'] = 'Pages'
     context = {
         'all_pages': model_page.Page.get_all()
     }

@@ -6,6 +6,7 @@ from flask_app.models import model_post, model_category, model_page
 
 @app.route('/posts')          
 def post_new():
+    session['page'] = 'Posts'
     context = {
         'all_posts': model_post.Post.get_all(),
         'all_categories': model_category.Category.get_all()
@@ -26,6 +27,7 @@ def post_show(id):
 
 @app.route('/post/<int:id>/edit')          
 def post_edit(id):
+    session['page'] = 'Edit Post'
     context = {
         'post': model_post.Post.get_one(id=id),
         'all_categories': model_category.Category.get_all()

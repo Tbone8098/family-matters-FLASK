@@ -1,0 +1,86 @@
+{% extends 'main/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/life_on_the_road.css') }}">
+{% endblock css %}
+
+{% block content %}
+{% if about_us %}
+<div class="row d-flex justify-content-center mt-5">
+    <div class="col-6 d-flex justify-content-center">
+        <div class="pe-3">
+            <p>{{ about_us.synopsis }}</p>
+            <a class="btn bg__charcoal txt__sunglow" href="/about_us">Read More</a>
+        </div>
+        <img class="border" src="{{ about_us.cover_picture }}" alt="about us" width="200px">
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-3 d-flex justify-content-center bg__charcoal p-3">
+    <div class="d-none d-sm-flex col-2 align-items-center">
+        <img src="{{ url_for('static', filename='img/icon/backward.png') }}" class="clickable w-100" id="prev">
+    </div>
+    <div class="col-11 col-sm-8 carousel__section">
+        {% for post in all_featured_posts %}
+        <div class="carousel__container {{'active' if loop.index == 1 else ''}}">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <a href="/post/{{ post.id }}">
+                        <img src="{{ post.cover_picture }}" class="w-100 carousel__image">
+                    </a>
+                </div>
+                <div class="col-12 col-sm-6 d-flex align-items-center">
+                    <div>
+                        <p class="text-wrap w-100">{{ post.synopsis }}</p>  
+                        <a class="btn bg__charcoal txt__sunglow" href="/post/{{ post.id }}">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="d-none d-sm-flex col-2 align-items-center">
+        <img src="{{ url_for('static', filename='img/icon/forward.png') }}" class="clickable w-100" id="next">
+    </div>
+</div>
+
+<div class="row mx-0 mt-5 d-flex justify-content-center">
+    <div class="col-11 ">
+        {% for category in all_categories %}
+        {% if category.posts | length > 0 %}
+        <div class="row text-center bg__charcoal txt__sunglow">
+            <h2>{{ category.name }}</h2>
+        </div>
+        <div class="row category__container mb-3">
+            {% for post in category.posts %}
+            {% if post.is_public %}
+            {% if loop.index < 5 %} <div class="post__container">
+                <a href="/post/{{post.id}}">
+                    <img src="{{ post.cover_picture }}">
+                </a>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/life_on_the_road.js') }}"></script>
+<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+{% endblock js %}
+
+<!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione minima ab, nihil cupiditate at obcaecati rerum magnam repellendus, quis, culpa eum maxime animi voluptatum eveniet totam ipsam voluptatibus quasi incidunt! -->
+
+
+
+
+
+

@@ -1,9 +1,40 @@
-<div class="bg__charcoal p-3 mt-5">
+<div class="bg__charcoal p-3 mt-5 d-flex justify-content-between">
     <div class="txt__pumpkin">
         <ul class="ul__menu">
             <li class="txt__sunglow">The Adventure Awaits</li>
-            <li>Contact Us</li>
+            <li class="modal__trigger" modal_target="contact-us-blog">Contact Us</li>
             <li>Blog</li>
         </ul>
+    </div>
+    <div class="txt__pumpkin">
+        <ul class="ul__menu">
+            <li class="txt__sunglow">REFIT</li>
+            <li class="modal__trigger" modal_target="contact-me-refit">Contact Me</li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal__wrapper d-none" modal_name="contact-me-refit">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine ">
+            <h2>Contact Me</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content">
+            <p><strong>Email:</strong> thibault.kendal@protonmail.com</p>
+            <p><strong>REFIT:</strong> <a href="refitrev.com/instructors/kendal">refitrev.com/instructors/kendal</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal__wrapper d-none" modal_name="contact-us-blog">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine ">
+            <h2>Contact Us</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content">
+            <p><strong>Email: </strong>theadventureawaits@protonmail.com</p>
+        </div>
     </div>
 </div>

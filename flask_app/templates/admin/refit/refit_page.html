@@ -11,12 +11,14 @@
         <div class="col-4">
             <label for="playlist">Active Playlist</label>
             <select class="form-select" name="playlist_id" id="playlist_id">
+                {% if all_playlists | length > 0 %}
                 <option value="{{page.playlist_id }}">{{ page.playlist }}</option>
                 {% for list in all_playlists %}
                 {% if list.id != page.playlist_id %}
                 <option value="{{ list.id }}">{{ list }}</option>
                 {% endif %}
                 {% endfor %}
+                {% endif %}
             </select>
         </div>
         <div class="col-4">

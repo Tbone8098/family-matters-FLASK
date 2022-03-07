@@ -28,8 +28,17 @@ if (onChangeEl.length > 0) {
     }
 }
 
+function formChange(el) {
+    console.log(`logging el: ${el}`);
+    updateElement(el)
+    if (el.getAttribute('clear')) {
+        el.value = ''
+    }
+    return el
+}
+
 function updateElement(el, form = null) {
-    if (!form){
+    if (!form) {
         form = new FormData()
         form.append(el.id, el.value)
     }
@@ -47,8 +56,21 @@ function updateElement(el, form = null) {
                 updatePage(data['data'])
             }
         })
+    return el
 }
 
 function showErrs(el, data) {
     console.log(el);
+}
+
+
+function setEventListeners(cls, eventType, func) {
+    var allEvents = document.querySelectorAll(`.${cls}`)
+    if (allEvents.length > 0) {
+        for (const item of allEvents) {
+            item.addEventListener(eventType, function () {
+                func(item)
+            })
+        }
+    }
 }

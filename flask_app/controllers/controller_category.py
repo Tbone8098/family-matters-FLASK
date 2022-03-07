@@ -5,6 +5,7 @@ from flask_app.models import model_category, model_post
 
 @app.route('/categories')
 def category():
+    session['page'] = 'Categories'
     context = {
         'all_categories': model_category.Category.get_all()
     }
@@ -36,6 +37,7 @@ def api_create_category():
     msg = {
         'status': 200,
         'data': {
+            'type': 'addrow',
             'id': id,
             **request.form
         }
@@ -67,6 +69,18 @@ def update_category(id):
     model_category.Category.update_one(id=id, **data)
 
     pass 
+
+@app.route('/api/category/<int:id>/update', methods=['post'])
+def api_update_category(id):
+    model_category.Category.update_one(id=id, **request.form)
+    msg = {
+        'status': 200,
+        'data': {
+            'type': 'update cell',
+            'id': id
+        }
+    }
+    return jsonify(msg)
 
 @app.route('/category/<int:id>/delete')
 def delete_category(id):
