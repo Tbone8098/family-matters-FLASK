@@ -1,6 +1,19 @@
-
-.container-fluid {
+* {
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+.base__container {
+    min-height: 100vh;
+}
+
+.row {
+    margin: 0; 
+    padding: 0; 
 }
 
 /* buttons */
@@ -64,4 +77,13 @@ li > a {
 }
 .txt__3xl {
     font-size: 3.052rem;
+}
+
+/* Positions */
+.p-relative {
+    position: relative;
+}
+.p__sticky__top {
+    position: sticky;
+    top: 0;
 }

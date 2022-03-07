@@ -15,11 +15,11 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
 
+    <!-- My CSS -->
     <link rel="icon" href="{{ url_for('static', filename='img/main/logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
-
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
     {% block base_css %}
 
     {% endblock base_css %}
@@ -27,14 +27,22 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="d-flex flex-column vh-100 p-0">
+    <div class="container-fluid base__container d-flex flex-column">
+        <div class="">
+            {% block base_header %}
+            {% include 'components/header.html' %}
+            {% endblock base_header %}
+        </div>
+        <div class="h-100">
             {% block base_content %}
-
             {% endblock base_content %}
         </div>
-        
+        <div class="">
+            {% block base_footer %}
+            {% endblock base_footer %}
+        </div>
     </div>
+
 
 
     <!-- summernote -->
@@ -42,11 +50,16 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
     <script src="{{ url_for('static', filename='summernote/summernote-lite.min.js') }}"></script>
 
-
     <!-- bootstrap js -->
     <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
 
+
+    <!-- swipe -->
+    <script src="{{ url_for('static', filename='js/swipe-it.min.js') }}"></script>
+
+    <!-- my js -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 
     {% block base_js %}
     {% endblock base_js %}

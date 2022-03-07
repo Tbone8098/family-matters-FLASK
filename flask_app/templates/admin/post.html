@@ -1,8 +1,13 @@
 {% extends 'admin/base.html' %}
 {% block content %}
+<div class="row">
+    {% include 'admin/components/blog_nav.html' %}
+</div>
 <div class="row text-center">
-    <h1 class="text-5xl">Posts</h1>
-    <div>
+    <div class="d-sm-none">
+        <button class="btn bg__sunglow txt__charcoal modal__trigger" modal_target="create__post">Create Post</button>
+    </div>
+    <div class="d-none d-sm-block">
         <form class="d-flex justify-content-center align-items-center gap-3" action="/post/create" method="post">
             <div>
                 <input class="form-control" type="text" name="name" id="name" placeholder="New Post">
@@ -21,32 +26,33 @@
     </div>
 </div>
 <div class="row">
+
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Author</th>
+                <th>Title</th>
                 <th>Category</th>
-                <th>Date</th>
-                <th>Featured</th>
-                <th>Published</th>
-                <th>Action</th>
+                <th class="d-none d-md-inline-block">Author</th>
+                <th class="d-none d-md-inline-block">Date</th>
+                <th class="d-none d-sm-inline-block">Featured</th>
+                <th class="d-none d-sm-inline-block">Published</th>
+                <th class="d-none d-sm-inline-block">Action</th>
             </tr>
         </thead>
         <tbody id="post_table_body">
             {% for post in all_posts %}
             <tr>
-                <td>{{ post.name }}</td>
-                <td>{{ post.author }}</td>
+                <td><a href="/post/{{post.id}}/edit">{{ post.name }}</a></td>
                 <td>{{ post.category.name }}</td>
-                <td>{{ post.created_at }}</td>
-                <td class="text-center"> <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input onChangeEl"
-                    value="{{1 if not post.is_featured else 0}}" url="/api/post/{{post.id}}/update" {{'checked'
-                    if post.is_featured else '' }}></td>
-                <td class="text-center"><input type="checkbox" name="is_public" id="is_public" class="form-check-input onChangeEl"
-                    value="{{1 if not post.is_public else 0}}" url="/api/post/{{post.id}}/update"
-                    {{'checked' if post.is_public else '' }}></td>
-                <td class="w-0 d-flex justify-content-center gap-1">
+                <td class="d-none d-sm-inline-block">{{ post.author }}</td>
+                <td class="d-none d-sm-inline-block">{{ post.created_at }}</td>
+                <td class="text-center d-none d-sm-inline-block"> <input type="checkbox" name="is_featured" id="is_featured"
+                        class="form-check-input onChangeEl" value="{{1 if not post.is_featured else 0}}"
+                        url="/api/post/{{post.id}}/update" {{'checked' if post.is_featured else '' }}></td>
+                <td class="text-center d-none d-sm-inline-block"><input type="checkbox" name="is_public" id="is_public"
+                        class="form-check-input onChangeEl" value="{{1 if not post.is_public else 0}}"
+                        url="/api/post/{{post.id}}/update" {{'checked' if post.is_public else '' }}></td>
+                <td class="w-0 d-flex justify-content-center gap-1 d-none d-sm-inline-block">
                     <a class="m-0 txt__olivine btn bg__charcoal" href="/post/{{post.id}}" target="blank">View</a>
                     <a class="m-0 btn bg__pine" href="/post/{{post.id}}/edit">Edit</a>
                     <a class="m-0 btn btn-danger" href="/post/{{post.id}}/delete">Delete</a>
@@ -57,4 +63,61 @@
     </table>
 </div>
 
+<div class="modal__wrapper d-none" modal_name="create__post">
+    <div class="modal__container">
+        <div class="modal__header">
+            <h2>some header title</h2>
+            <span class="modal__close">close</span>
+        </div>
+        <div class="modal__content">
+            <form class="d-flex flex-column justify-content-center align-items-center gap-3" action="/post/create" method="post">
+                <input class="form-control" type="text" name="name" id="name" placeholder="New Post">
+                <select class="form-select" name="category_id" id="category_id">
+                    {% for category in all_categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="btn btn-success">Create Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 {% endblock content %}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Featured</th>
+            <th>Published</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="post_table_body">
+        {% for post in all_posts %}
+        <tr>
+            <td>{{ post.name }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.category.name }}</td>
+            <td>{{ post.created_at }}</td>
+            <td class="text-center"> <input type="checkbox" name="is_featured" id="is_featured"
+                    class="form-check-input onChangeEl" value="{{1 if not post.is_featured else 0}}"
+                    url="/api/post/{{post.id}}/update" {{'checked' if post.is_featured else '' }}></td>
+            <td class="text-center"><input type="checkbox" name="is_public" id="is_public"
+                    class="form-check-input onChangeEl" value="{{1 if not post.is_public else 0}}"
+                    url="/api/post/{{post.id}}/update" {{'checked' if post.is_public else '' }}></td>
+            <td class="w-0 d-flex justify-content-center gap-1">
+                <a class="m-0 txt__olivine btn bg__charcoal" href="/post/{{post.id}}" target="blank">View</a>
+                <a class="m-0 btn bg__pine" href="/post/{{post.id}}/edit">Edit</a>
+                <a class="m-0 btn btn-danger" href="/post/{{post.id}}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

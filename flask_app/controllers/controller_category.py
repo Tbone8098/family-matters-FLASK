@@ -5,6 +5,7 @@ from flask_app.models import model_category, model_post
 
 @app.route('/categories')
 def category():
+    session['page'] = 'Categories'
     context = {
         'all_categories': model_category.Category.get_all()
     }

@@ -1,29 +1,38 @@
 {% extends 'admin/base.html' %}
 {% block content %}
+<div>
+    {% include 'admin/components/blog_nav.html' %}
+</div>
 <div class="row m-0 h-100">
     <div class="col-12 h-100">
         <div class="border my-2 p-3">
             <form action="/post/{{post.id}}/update" method="post">
                 <div class="row d-flex align-items-center my-3">
                     <div class="row d-flex align-items-center">
-                        <div class="w-25">
+                        <div class="w-100 d-flex justify-content-end align-items-center gap-1">
+                            <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
+                            <a href="/post/{{post.id}}" target="_blank" class="btn bg__sunglow my-1">View Post</a>
+                            <a href="/post/{{post.id}}/delete" class="btn btn-danger my-1">Delete Post</a>
+                        </div>
+                        <div class="w-100 ">
                             <label class="text-center" for="name">Post Name</label>
                             <input class="form-control" type="text" name="name" id="name" value="{{post.name}}">
                         </div>
-                        <div class="w-25 d-flex flex-column gap-1">
+                        <div class="w-50 d-flex flex-column gap-1">
                             <div>
-                                <input type="checkbox" name="is_featured" id="is_featured"
-                                class="form-check-input" value="{{1 if post.is_featured == 0 else 0}}"
-                                {{'checked' if post.is_featured == 1 else '' }}>
+                                <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input"
+                                    value="{{1 if post.is_featured == 0 else 0}}" {{'checked' if post.is_featured==1
+                                    else '' }}>
                                 <label for="is_featured">Featured</label>
                             </div>
                             <div>
                                 <input type="checkbox" name="is_public" id="is_public" class="form-check-input"
-                                value="{{1 if post.is_public == 0 else 0}}" {{'checked' if post.is_public == 1 else '' }}>
+                                    value="{{1 if post.is_public == 0 else 0}}" {{'checked' if post.is_public==1 else ''
+                                    }}>
                                 <label for="is_public">Publish</label>
                             </div>
                         </div>
-                        <div class="w-25">
+                        <div class="w-100">
                             <label for="category_id">Category</label>
                             <select class="form-select onChangeEl" name="category_id" id="category_id"
                                 url="/api/post/{{post.id}}/update">
@@ -36,7 +45,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="w-25">
+                        <div class="w-100">
                             <label for="cover_picture">Cover Picture</label>
                             <input class="form-control onChangeEl" url="/api/post/{{post.id}}/update" type="text"
                                 name="cover_picture" id="cover_picture" placeholder="Cover Picture URL"
@@ -44,15 +53,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="w-75 mt-3">
+                        <div class="w-100 mt-3">
                             <textarea class="form-control onChangeEl" url="/api/post/{{post.id}}/update" name="synopsis"
                                 id="synopsis" cols="30" rows="3" placeholder="Synopsis"
                                 max=255>{{ post.synopsis if post.synopsis != None else '' }}</textarea>
-                        </div>
-                        <div class="w-25 d-flex justify-content-end align-items-center gap-1">
-                            <button class="btn bg__pine w-50 txt__white txt__lg my-1">Save</button>
-                            <a href="/post/{{post.id}}" target="_blank" class="btn bg__sunglow my-1">View Post</a>
-                            <a href="/post/{{post.id}}/delete" class="btn btn-danger my-1">Delete Post</a>
                         </div>
                     </div>
                 </div>

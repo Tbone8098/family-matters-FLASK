@@ -1,7 +1,7 @@
 {% extends 'admin/base.html' %}
 {% block content %}
 <div class="row text-center">
-    <h1 class="text-5xl">Pages</h1>
+    {% include 'admin/components/blog_nav.html' %}
     <div class="d-flex justify-content-center">
         <input type="text" name="name" id="name" class="onChangeEl form-control w-25" clear="true" url="/api/page/create"
             placeholder="New Page">

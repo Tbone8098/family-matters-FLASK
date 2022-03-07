@@ -1,46 +1,71 @@
 {% extends 'main/base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/refit_on_the_road.css') }}">
+{% endblock css %}
+
 {% block header %}
-{% include 'main/refit/header.html' %}
-{% include 'main/components/navbar.html' %}
-{% include 'main/refit/navbar.html' %}
+<div class="row p__sticky__top">
+    {% include 'main/refit/header.html' %}
+</div>
+<div class="row">
+    {% include 'main/components/navbar.html' %}
+</div>
+<div class="row">
+    {% include 'main/refit/navbar.html' %}
+</div>
 {% endblock header %}
 
 {% block content %}
 <div class="row">
-    <h1>REFIT on the ROAD</h1>
+    <h1 class="text-center">REFIT on the ROAD</h1>
 </div>
 <div class="row">
-    <img src="{{ page.banner1_picture }}" alt="" class="m-0 p-0">
+    <img src="{{ page.banner1_picture }}" class="m-0 p-0 w-100">
 </div>
 <div class="row bg__black txt__white py-3 mt-3">
     <p class="d-flex justify-content-end mb-0">EVERY <span class="txt__refit__yellow mx-1">BODY</span> BELONGS</p>
 </div>
-<div class="row">
-    <h2>About REFIT</h2>
-    <p>REFIT® is a total body fitness format, including cardio, balance, flexibility and toning. We put the fun in
-        fitness and unite people across the country and around the globe through the international language of dance!
-    </p>
-    <a href="https://refitrev.com/">Visit the official REFIT Website</a>
-</div>
-<div class="row">
-    <div class="bg__refit__blue p-3 my-3 col-12">
-        <h2 class="txt__white text-center w-100">Kendal's Class</h2>
+<div class="row mt-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4">
+        <h2 class="text-center">About REFIT</h2>
+        <p>REFIT® is a total body fitness format, including cardio, balance, flexibility and toning. We put the fun in
+            fitness and unite people across the country and around the globe through the international language of
+            dance!
+        </p>
+        <a href="https://refitrev.com/">Visit the official REFIT Website</a>
     </div>
+    <div class="d-none d-sm-block col-sm-6 col-md-4">
+        <!-- TODO: make refit image changable -->
+        <img src="{{ url_for('static', filename='img/refit/refitDisco.png') }}" alt="refit disco"
+            class="w-100 about_refit_picture">
+    </div>
+</div>
+<div class="row bg__refit__blue mt-3">
+    <h2 class="txt__white text-center w-100">Kendal's Class</h2>
+</div>
+<div class="row d-flex justify-content-center mt-3">
     {% if page.news %}
-    <div class="border">
-        <h3>News Update</h3>
+    <div class="col-12 col-sm-8 border border-danger bg__refit__blue p-3">
+        <h3 class="text-center txt__refit__yellow">News Update</h3>
         {{ page.news | safe }}
     </div>
     {% endif %}
 
+</div>
+<div class="row d-flex justify-content-center mt-3">
     {% if page.schedule %}
-    <div>
+    <div class="col-12 col-sm-8 col-md-6 px-0">
+        <h2 class="text-center">Class Schedule</h2>
         {{ page.schedule | safe }}
     </div>
     {% endif %}
-    <div>
+</div>
+<div class="row d-flex justify-content-center mt-3">
+    {% if page.playlist %}
+    <div class="col-12 col-sm-8 col-md-6 px-0">
         <h3>Spotify Playlist</h3>
+        <!-- TODO add a dropdown for all the other playlists -->
         <table class="table">
             <thead>
                 <tr>
@@ -51,50 +76,47 @@
             </thead>
             <tbody>
                 {% for song in page.playlist.songs %}
-                    <tr>
-                        <td>{{ song.name }}</td>
-                        <td>{{ song.artist }}</td>
-                        <td>{{ song.link }}</td>
-                    </tr>
+                <tr>
+                    <td>{{ song.name }}</td>
+                    <td>{{ song.artist }}</td>
+                    <td>{{ song.link }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <p>Spotify teaser here</p>
     </div>
+    {% endif %}
 </div>
-<div class="row">
-    <div class="col-12 md-col-6">
-        <img src="{{ page.loc_picture }}"
-            alt="refit class times" width="100%">
+<div class="row mt-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4 border p-0">
+        <img src="{{ page.loc_picture }}" alt="refit class times" class="w-100">
     </div>
-    <div class="col-12 md-col-6">
+    <div class="col-12 col-sm-6 col-md-4 border">
+        <h2 class="text-center">Location Details</h2>
         {{ page.loc | safe }}
     </div>
-    <div class="col-12 md-col-6">
+</div>
+<div class="row d-flex flex-sm-row-reverse justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4 border">
+        <img src="{{ page.zoom_picture }}" alt="zoom image" class="w-100">
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 border">
+        <h2 class="text-center">Online Info</h2>
         {{ page.online_info | safe }}
     </div>
-    <div class="col-12 md-col-6">
-        <img src="{{ page.zoom_picture }}"
-            alt="zoom image" width="100%">
+</div>
+<div class="row">
+    <img src="{{ page.banner2_picture }}" alt="refit banner" class="m-0 mt-3 p-0 w-100">
+</div>
+<div class="row">
+    <h2 class="text-center" id="about_me">About ME</h2>
+</div>
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4">
+        <img src="{{ page.about_me_picture }}" alt="kendal" class="w-100 about_refit_picture">
     </div>
-</div>
-<div class="row">
-    <img src="{{ page.banner2_picture }}"
-        alt="refit banner">
-</div>
-<div class="row">
-    <h2 id="about_me">About ME</h2>
-</div>
-<div class="row">
-    <div class="col-12 md-col-6">
-        <img src="{{ page.about_me_picture }}" alt="kendal" width="100%">
-    </div>
-    <div class="col-12 md-col-6">
+    <div class="col-12 col-sm-6 col-md-4">
         {{ page.about_me | safe }}
     </div>
 </div>
-
-
 {% endblock content %}
-
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat consequuntur sequi similique cupiditate distinctio! Aliquam molestias voluptatum aliquid ipsum accusantium, accusamus soluta laborum provident distinctio blanditiis? Rem ut quas quos.

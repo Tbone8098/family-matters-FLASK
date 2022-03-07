@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block base_content %}
-    {% include 'components/header.html' %}
     <div class="d-flex h-100 justify-content-center align-items-center">
         <form action="user/create" method="post">
             <div class="mb-3">
-                <input class="w-100" type="text" name="first_name" id="first_name" placeholder="First Name" value="tyelr">
+                <input class="w-100" type="text" name="first_name" id="first_name" placeholder="First Name" value="tyler">
                 {% for message in get_flashed_messages(category_filter=["err_user_first_name"]) %}
                 <p class="alert alert-danger">{{ message }}</p>
                 {% endfor %}

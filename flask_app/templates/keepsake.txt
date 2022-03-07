@@ -1,0 +1,16 @@
+    <!-- <div class="container-fluid base__container d-flex flex-column">
+        <div class="row mt-0 base__header">
+            {% block base_header %}
+            {% include 'components/header.html' %}
+            {% endblock base_header %}
+        </div>
+        <div class="row base__content h-100">
+            {% block base_content %}
+            
+            {% endblock base_content %}
+        </div>
+        <div class="row mt-auto base__footer">
+            {% block base_footer %}
+            {% endblock base_footer %}
+        </div>
+    </div> -->

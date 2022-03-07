@@ -2,7 +2,43 @@
     <img src="{{ url_for('static', filename='img/icon/refit_on_the_road.png') }}" alt="refit on the road icon"
         width="50px">
     <div class="d-flex gap-3 align-items-center">
-        <a class="txt__white no__a" href="">Contact Me</a>
-        <a class="btn bg__pumpkin txt__white" href="">Donate</a>
+        <span class="txt__white no__a modal__trigger" modal_target="contact_me">Contact Me</span>
+        <span class="btn bg__pumpkin txt__white modal__trigger" modal_target="donate">Donate</span>
+    </div>
+</div>
+
+<div class="modal__wrapper d-none" modal_name="contact_me">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine">
+            <h2>Contact Me</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content">
+            <p><strong>Email: </strong>thibault.kendal@protonmail.com</p>
+            <p><strong>REFIT: </strong><a href="refitrev.com/instructors/kendal">refitrev.com/instructors/kendal</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal__wrapper d-none" modal_name="donate">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine">
+            <h2>Donate</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content d-flex flex-wrap justify-content-center">
+            <div class="col-full col-sm-6 col-md-4 text-center">
+                <h3>Paypal</h3>
+                <p>@kendaltbo</p>
+                <img src="{{ url_for('static', filename='img/refit/donatePaypal.png') }}" alt="paypal qr code"
+                    class="w-100">
+            </div>
+            <div class="col-full col-sm-6 col-md-4 text-center">
+                <h3>Venmo</h3>
+                <p>@KendalThibault</p>
+                <img src="{{ url_for('static', filename='img/refit/donateVenmo.png') }}" alt="venmo qr code"
+                    class="w-100">
+            </div>
+        </div>
     </div>
 </div>

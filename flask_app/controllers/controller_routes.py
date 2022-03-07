@@ -20,7 +20,7 @@ def refit_on_the_road():
     context = {
         'page': model_refit_page.RefitPage.get_all()[0]
     }
-    print(context)
+    print(context['page'].serialize())
     return render_template('/main/refit/refit_on_the_road.html', **context)
 
 @app.route('/life_on_the_road')
@@ -33,7 +33,7 @@ def life_on_the_road():
         'all_categories': model_category.Category.get_all(),
         'about_us': model_page.Page.get_one(custom_url="about_us")
     }
-    return render_template('/main/life_on_the_road.html', **context)
+    return render_template('/main/blog/life_on_the_road.html', **context)
 
 @app.route('/page_not_found')
 def page_not_found():

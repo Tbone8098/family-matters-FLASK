@@ -2,11 +2,19 @@ var prevBtn = document.querySelector('#prev')
 var nextBtn = document.querySelector('#next')
 
 prevBtn.addEventListener('click', function(){
-    console.log('prev');
     nextSlide(-1)
 })
 nextBtn.addEventListener('click', function(){
-    console.log('next');
+    nextSlide(1)
+})
+
+
+const carouselSection = new SwipeIt('.carousel__section');
+carouselSection
+.on('swipeLeft', function(event) {
+    nextSlide(-1)
+})
+.on('swipeRight', function(event) {
     nextSlide(1)
 })
 

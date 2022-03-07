@@ -1,7 +1,9 @@
 {% extends 'admin/base.html' %}
 {% block content %}
-<div class="row text-center">
-    <h1 class="text-5xl">Categories</h1>
+<div>
+    {% include 'admin/components/blog_nav.html' %}
+</div>
+<div class="text-center">
     <div>
         <input type="text" name="name" id="name" class="onChangeEl" clear="true" url="/api/category/create" placeholder="New Category">
     </div>
@@ -32,3 +34,5 @@
 {% block js %}
     <script src="{{ url_for('static', filename='js/categories.js') }}"></script>
 {% endblock js %}
+
+
