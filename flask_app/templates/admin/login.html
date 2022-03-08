@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block base_content %}
     <div class="row h-100 d-flex justify-content-center align-items-center">
-        <div class="col-3">
+        <div class="col-8 col-md-3">
             <form action="user/process_login" method="post">
                 <div class="mb-3">
                     <input class="w-100" type="text" name="email" id="email" placeholder="Email">
@@ -15,8 +15,10 @@
                     <p class="alert alert-danger">{{ message }}</p>
                     {% endfor %}
                 </div>
-                <button class="btn btn-success">Login</button>
-                <a class="text-blue-500" href="/register">Register Here</a>
+                <div class="w-100">
+                    <button class="btn btn-success w-100">Login</button>
+                </div>
+                <!-- <a class="text-blue-500" href="/register">Register Here</a> -->
             </form>
         </div>
     </div>
