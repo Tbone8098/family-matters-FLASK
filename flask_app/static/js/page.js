@@ -34,7 +34,7 @@ for (const btn of menuItems) {
             })
             
         } else if (type == 'images'){
-            console.log('images');
+            // console.log('images');
         }
     })
 }

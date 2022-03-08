@@ -2,13 +2,13 @@
 {% block content %}
 <form action="/refit_page/{{page.id}}/update" method="post">
     <div class="row">
-        <div class="d-flex justify-content-between px-3">
+        <div class="col-12 d-flex justify-content-between px-3">
             <h1>Page</h1>
             <button class="btn btn-success">Save</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-sm-4">
             <label for="playlist">Active Playlist</label>
             <select class="form-select" name="playlist_id" id="playlist_id">
                 {% if all_playlists | length > 0 %}
@@ -21,38 +21,38 @@
                 {% endif %}
             </select>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-sm-4">
             <label for="loc_picture">Square Picture</label>
             <input class="form-control" type="text" name="loc_picture" id="loc_picture" value="{{ page.loc_picture if page.loc_picture != None else '' }}">
             <label for="zoom_picture">Zoom Picture</label>
             <input class="form-control" type="text" name="zoom_picture" id="zoom_picture" value="{{ page.zoom_picture if page.zoom_picture != None else '' }}">
         </div>
-        <div class="col-4">
+        <div class="col-12 col-sm-4">
             <label for="banner1_picture">Banner 1 Picture</label>
             <input class="form-control" type="text" name="banner1_picture" id="banner1_picture" value="{{ page.banner1_picture if page.banner1_picture != None else '' }}">
             <label for="banner2_picture">Banner 2 Picture</label>
             <input class="form-control" type="text" name="banner2_picture" id="banner2_picture" value="{{ page.banner2_picture if page.banner2_picture != None else '' }}">
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-6">
+    <div class="row">
+        <div class="col-12 col-lg-6 mt-3">
             <h2 class="text-center">Schedule</h2>
             <textarea name="schedule" id="schedule" cols="30" rows="10"
             class="summernote">{{ page.schedule if page.schedule != None else '' }}</textarea>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-6 mt-3">
             <h2 class="text-center">Location</h2>
             <textarea name="loc" id="loc" cols="30" rows="10"
             class="summernote">{{ page.loc if page.loc != None else '' }}</textarea>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-6">
+    <div class="row">
+        <div class="col-12 col-lg-6 mt-3">
             <h2 class="text-center">News Update</h2>
             <textarea name="news" id="news" cols="30" rows="3"
                 class="summernote">{{ page.news if page.news != None else '' }}</textarea>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-lg-6 mt-3">
             <div class="d-flex justify-content-between align-items-center px-3">
                 <h2 class="text-center">About Me</h2>
                 <input class="form-control w-50" type="text" name="about_me_picture" id="about_me_picture"

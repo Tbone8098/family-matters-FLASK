@@ -34,3 +34,7 @@
     max-height: 50px;
     text-overflow: ellipsis;
 }
+
+.arrow__btn {
+    max-width: 150px;
+}

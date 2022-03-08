@@ -20,3 +20,7 @@ class Post(model_base.base_model):
     @property
     def category(self):
         return model_category.Category.get_one(id=self.category_id)
+
+    @property
+    def author(self):
+        return model_user.User.get_one(id=self.user_id)

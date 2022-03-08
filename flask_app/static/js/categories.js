@@ -1,7 +1,7 @@
 function updatePage(data) {
     if (data['type'] === 'addrow'){
         let tableBody = document.querySelector('#category_table_body')
-        console.log(data);
+        // console.log(data);
         tableBody.innerHTML += `
         <tr id="${data['id']}">
         <td>${data['name']}</td>
@@ -16,7 +16,7 @@ function updatePage(data) {
     else if (data['type'] === 'update cell'){
         let row = document.getElementById(data['id'])
         let td = row.firstElementChild
-        console.log(td);
+        // console.log(td);
         let content = td.firstElementChild.value
         td.innerHTML = content
     }

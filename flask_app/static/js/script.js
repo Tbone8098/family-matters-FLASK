@@ -2,7 +2,6 @@
 var allTextAreas = document.querySelectorAll('.summernote')
 for (const element of allTextAreas) {
     $(element).summernote()
-    console.log(typeof element);
 }
 
 // summernote save
@@ -59,9 +58,9 @@ function updateElement(el, form = null) {
     return el
 }
 
-function showErrs(el, data) {
-    console.log(el);
-}
+// function showErrs(el, data) {
+//     console.log(el);
+// }
 
 
 function setEventListeners(cls, eventType, func) {

@@ -38,13 +38,14 @@ class User(model_base.base_model):
             flash("Invalid email address!", 'err_user_email')
             is_valid = False
 
-        if len(data['pw']) < 1:
-            flash('Password is required', 'err_user_pw')
+        if len(data['pw']) < 7:
+            flash('Password is required and must be more than 7 characters', 'err_user_pw')
             is_valid = False
 
-        if len(data['confirm_pw']) < 1:
-            flash('Confirm Password is required', 'err_user_confirm_pw')
+        if len(data['confirm_pw']) < 7:
+            flash('Confirm Password is required and must be more than 7 characters', 'err_user_confirm_pw')
             is_valid = False
+
         elif data['confirm_pw'] != data['pw']:
             flash('Passwords do not match', 'err_user_confirm_pw')
             is_valid = False

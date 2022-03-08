@@ -19,8 +19,8 @@
 {% endif %}
 
 <div class="row mt-3 d-flex justify-content-center bg__charcoal p-3">
-    <div class="d-none d-sm-flex col-2 align-items-center">
-        <img src="{{ url_for('static', filename='img/icon/backward.png') }}" class="clickable w-100" id="prev">
+    <div class="d-none d-sm-flex col-2 align-items-center justify-content-end">
+        <img src="{{ url_for('static', filename='img/icon/backward.png') }}" class="clickable w-100 arrow__btn" id="prev">
     </div>
     <div class="col-11 col-sm-8 carousel__section">
         {% for post in all_featured_posts %}
@@ -43,7 +43,7 @@
     </div>
 
     <div class="d-none d-sm-flex col-2 align-items-center">
-        <img src="{{ url_for('static', filename='img/icon/forward.png') }}" class="clickable w-100" id="next">
+        <img src="{{ url_for('static', filename='img/icon/forward.png') }}" class="clickable w-100 arrow__btn" id="next">
     </div>
 </div>
 
