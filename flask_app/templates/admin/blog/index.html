@@ -1,0 +1,25 @@
+{% extends 'admin/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock css %}
+
+{% block content %}
+<div class="row d-flex justify-content-evenly align-items-center flex-wrap gap-3 h-100">
+    <a class="no__a col-5" href="/categories">
+        <div class=" overview__btn">
+            Categories
+        </div>
+    </a>
+    <a class="no__a col-5" href="/posts">
+        <div class=" overview__btn">
+            Posts
+        </div>
+    </a>
+    <a class="no__a col-5" href="/pages">
+        <div class=" overview__btn">
+            Pages
+        </div>
+    </a>
+</div>
+{% endblock content %}

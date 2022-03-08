@@ -7,7 +7,7 @@ if (allModalTriggers.length > 0) {
     for (let btn of allModalTriggers) {
         btn.addEventListener('click', function () {
             let modalWrapper = document.querySelector(`[modal_name="${btn.getAttribute('modal_target')}"]`)
-            console.log(modalWrapper);
+            // console.log(modalWrapper);
             showModal(modalWrapper)
         })
     }

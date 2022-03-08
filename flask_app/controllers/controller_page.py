@@ -1,9 +1,11 @@
 from flask_app import app, bcrypt
 from flask import render_template, redirect, request, session, flash, jsonify
+from flask_app.config.helper_func import checkLogin
 from flask_app.models import model_page, model_user
 
 
 @app.route('/pages')
+@checkLogin
 def page():
     session['page'] = 'Pages'
     context = {
@@ -12,10 +14,12 @@ def page():
     return render_template('admin/page.html', **context)
 
 @app.route('/page/new')
+@checkLogin
 def new_page():
     return render_template('admin/page_new.html')
 
 @app.route('/page/create', methods=['post'])
+@checkLogin
 def create_page():
     if not model_page.Page.validation(request.form):
         return redirect('/page/new')
@@ -29,6 +33,7 @@ def create_page():
     return redirect(f'/page/{id}/edit') 
 
 @app.route('/api/page/create', methods=['post'])
+@checkLogin
 def api_page_create():
     errors = model_page.Page.api_validation(request.form)
     if errors:
@@ -67,6 +72,7 @@ def show_page(id=None, custom_url=None):
     return render_template('main/page_show.html', **context)
 
 @app.route('/page/<int:id>/edit')
+@checkLogin
 def edit_page(id):
     context = {
         'page': model_page.Page.get_one(id=id)
@@ -74,6 +80,7 @@ def edit_page(id):
     return render_template('/admin/page_edit.html', **context)
 
 @app.route('/page/<int:id>/update', methods=['post'])
+@checkLogin
 def update_page(id):
     data = {
         **request.form
@@ -84,11 +91,13 @@ def update_page(id):
     return redirect(f'/page/{id}/edit')
 
 @app.route('/api/page/<int:id>/update', methods=['post'])
+@checkLogin
 def api_update_page(id):
     model_page.Page.update_one(**request.form, id=id)
     return jsonify(msg="success")
 
 @app.route('/page/<int:id>/delete')
+@checkLogin
 def delete_page(id):
     model_page.Page.delete_one(id=id)
     return redirect('/pages')

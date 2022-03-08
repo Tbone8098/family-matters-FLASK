@@ -9,9 +9,9 @@ for (const btn of allCategoryPickerBtn) {
         fetch(`/api/category/${categoryId}`)
             .then(resp => resp.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 let container = document.querySelector('#post-container')
-                console.log(container);
+                // console.log(container);
                 container.innerHTML = ''
                 for (let i = 0; i < 4; i++){
                     post = data['content'][i]

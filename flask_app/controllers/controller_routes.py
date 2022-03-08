@@ -1,5 +1,6 @@
+from tabnanny import check
 from flask_app import app
-import jsonpickle
+from flask_app.config.helper_func import checkLogin
 from flask import render_template, redirect, request, session, flash, jsonify
 from flask_app.models import model_post, model_category, model_page, model_playlist, model_refit_page
 
@@ -9,9 +10,10 @@ def index():
     return render_template('main/index.html')
 
 @app.route('/dashboard')
+@checkLogin
 def dashboard():
-    if 'uuid' not in session:
-        return redirect('/')
+    # if 'uuid' not in session:
+    #     return redirect('/')
     session['page'] = 'dashboard'
     return render_template('admin/dashboard.html')
 
@@ -34,6 +36,18 @@ def life_on_the_road():
         'about_us': model_page.Page.get_one(custom_url="about_us")
     }
     return render_template('/main/blog/life_on_the_road.html', **context)
+
+@app.route('/admin/refit')
+@checkLogin
+def refit_index():
+
+    return render_template('admin/refit/index.html')
+
+@app.route('/admin/blog')
+@checkLogin
+def blog_index():
+
+    return render_template('admin/blog/index.html')
 
 @app.route('/page_not_found')
 def page_not_found():

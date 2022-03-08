@@ -1,9 +1,11 @@
 {% extends 'admin/base.html' %}
 {% block content %}
-<div class="row text-center">
+<div class="row d-sm-none">
     {% include 'admin/components/blog_nav.html' %}
-    <div class="d-flex justify-content-center">
-        <input type="text" name="name" id="name" class="onChangeEl form-control w-25" clear="true" url="/api/page/create"
+</div>
+<div class="row text-center mt-3 d-flex justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6">
+        <input type="text" name="name" id="name" class="onChangeEl form-control" clear="true" url="/api/page/create"
             placeholder="New Page">
     </div>
 </div>
@@ -12,8 +14,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Created by</th>
-                <th>Created</th>
+                <th class="d-none d-sm-table-cell">Created by</th>
+                <th class="d-none d-sm-table-cell">Created</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,8 +23,8 @@
             {% for page in all_pages %}
             <tr>
                 <td>{{ page.name }}</td>
-                <td>{{ page.author }}</td>
-                <td>{{ page.created_at }}</td>
+                <td class="d-none d-sm-table-cell">{{ page.author }}</td>
+                <td class="d-none d-sm-table-cell">{{ page.created_at }}</td>
                 <td>
                     <a class="m-0 btn bg__pine" href="/page/{{page.id}}/edit">Edit</a>
                     <a class="m-0 btn btn-danger" href="/page/{{page.id}}/delete">Delete</a>
