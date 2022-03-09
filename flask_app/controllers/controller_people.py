@@ -25,10 +25,10 @@ def join_people_to_post():
     model_post_has_people.PostHasPeople.create(**request.form)
     return redirect(f'/admin/post/{post_id}/edit')
 
-@app.route('/admin/people/<int:id>')
-@checkLogin
+@app.route('/people/<int:id>')
 def show_people(id):
-    pass 
+    
+    return 'a person page'
 
 @app.route('/admin/people/<int:id>/edit')
 @checkLogin
