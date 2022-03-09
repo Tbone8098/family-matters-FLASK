@@ -1,7 +1,6 @@
-.admin__Content{
+.admin__content{
     max-height: 94%;
 }
-
 .content__area {
     padding: 0;
     max-height: 100%;
@@ -21,4 +20,16 @@
     color: #FCCA46;
     border: 0.5em solid black;
     border-radius: 0.5em;
+}
+
+.navbar__bottom {
+    background-color: #333;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar_container {
+    margin-top: 10em;
 }

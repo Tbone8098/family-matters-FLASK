@@ -3,21 +3,21 @@ from flask import render_template, redirect, request, session, flash, jsonify
 from flask_app.config.helper_func import checkLogin
 from flask_app.models import model_category, model_post
 
-@app.route('/categories')
+@app.route('/admin/categories')
 @checkLogin
 def category():
     session['page'] = 'Categories'
     context = {
         'all_categories': model_category.Category.get_all()
     }
-    return render_template('admin/category.html', **context)
+    return render_template('admin/blog/category.html', **context)
 
-@app.route('/category/new')
+@app.route('/admin/category/new')
 @checkLogin
 def new_category():
-    return render_template('admin/category_new.html')
+    return render_template('admin/blog/category_new.html')
 
-@app.route('/category/create', methods=['post'])
+@app.route('/admin/category/create', methods=['post'])
 @checkLogin
 def create_category():
     if not model_category.Category.validation(request.form):
@@ -26,7 +26,7 @@ def create_category():
     model_category.Category.create(**request.form)
     return redirect('/categories') 
 
-@app.route('/api/category/create', methods=['post'])
+@app.route('/admin/api/category/create', methods=['post'])
 @checkLogin
 def api_create_category():
     errors = model_category.Category.api_validation(request.form)
@@ -48,7 +48,7 @@ def api_create_category():
     }
     return jsonify(msg)
 
-@app.route('/api/category/<int:id>')
+@app.route('/admin/api/category/<int:id>')
 @checkLogin
 def show_category(id):
     all_posts = model_post.Post.get_all_serialized(category_id=id, is_public=1)
@@ -57,7 +57,7 @@ def show_category(id):
     }
     return jsonify(msg)
 
-@app.route('/api/category/<int:id>/update', methods=['post'])
+@app.route('/admin/api/category/<int:id>/update', methods=['post'])
 @checkLogin
 def api_update_category(id):
     model_category.Category.update_one(id=id, **request.form)
@@ -70,7 +70,7 @@ def api_update_category(id):
     }
     return jsonify(msg)
 
-@app.route('/category/<int:id>/delete')
+@app.route('/admin/category/<int:id>/delete')
 @checkLogin
 def delete_category(id):
     model_category.Category.delete_one(id=id)

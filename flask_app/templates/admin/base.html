@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block base_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
-    {% block css %}
-        
-    {% endblock css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% block css %}
+
+{% endblock css %}
 {% endblock base_css %}
 
 {% block base_header %}
@@ -17,22 +17,24 @@
 {% endblock base_header %}
 
 {% block base_content %}
-<div class="row admin__Content h-100">
+<div class="row admin__content h-100">
     <div class="col-lg-1 col-sm-2 px-0 d-none d-sm-block">
         {% include 'admin/components/side_navbar.html' %}
     </div>
     <div class="col-12 col-sm-10 col-lg-11 content__area">
         {% block content %}
-        
+
         {% endblock content %}
     </div>
 </div>
 {% endblock base_content %}
 
 {% block base_footer %}
-    <div class="row d-sm-none">
+<div class="row d-sm-none navbar_container">
+    <div class="navbar__bottom">
         {% include 'admin/components/bottom_navbar.html' %}
     </div>
+</div>
 {% endblock base_footer %}
 
 {% block base_js %}

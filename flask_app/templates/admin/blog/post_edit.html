@@ -11,22 +11,32 @@
 <div class="row m-0 h-100">
     <div class="col-12 h-100 ">
         <div class="border my-2 p-3 post__container">
-            <form action="/post/{{post.id}}/update" method="post">
+            <form action="/admin/post/{{post.id}}/update" method="post">
                 <div class="row d-flex align-items-center my-3">
                     <div class="row d-flex align-items-center">
-                        <div class="col-12 d-flex justify-content-end align-items-center gap-1">
-                            <button class="btn bg__pine txt__white txt__lg my-1 py-0">Save</button>
-                            <a href="/post/{{post.id}}" target="_blank" class="btn bg__sunglow my-1">View Post</a>
-                            <a href="/post/{{post.id}}/delete" class="btn btn-danger my-1">Delete Post</a>
+                        <div class="col-12">
+                            <div class="row d-flex flex-column-reverse flex-sm-row align-items-end">
+                                <div class="col-12 col-sm-8">
+                                    <label class="text-center" for="name">Post Name</label>
+                                    <input class="form-control" type="text" name="name" id="name" value="{{post.name}}">
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="d-flex gap-1">
+                                        <a href="/post/{{post.id}}" target="_blank"
+                                            class="btn bg__sunglow my-1 w-50">View Post</a>
+                                        <a href="/post/{{post.id}}/delete" class="btn btn-danger my-1 w-50">Delete
+                                            Post</a>
+                                    </div>
+                                    <button class="btn bg__pine txt__white txt__lg my-1 py-0 w-100">Save</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-4">
-                            <label class="text-center" for="name">Post Name</label>
-                            <input class="form-control" type="text" name="name" id="name" value="{{post.name}}">
-                        </div>
-                        <div class="col-12 col-sm-4 d-flex justify-content-between justify-content-sm-start gap-1">
+                        <div
+                            class="col-12 col-sm-4 d-flex justify-content-between justify-content-sm-start gap-1 align-items-end">
                             <div>
                                 {% if post.is_featured == 1 %}
-                                <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input" checked>
+                                <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input"
+                                    checked>
                                 {% else %}
                                 <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input">
                                 {% endif %}
@@ -54,11 +64,23 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="w-100">
+                        <div class="col-sm-4">
+                            <label for="posted_date">Posted Date</label>
+                            <input class="form-control" type="date" name="posted_date" id="posted_date"
+                                value="{{ post.posted_date }}">
+                        </div>
+                        <div class="col-12 col-sm-8 col-lg-10">
                             <label for="cover_picture">Cover Picture</label>
                             <input class="form-control onChangeEl" url="/api/post/{{post.id}}/update" type="text"
                                 name="cover_picture" id="cover_picture" placeholder="Cover Picture URL"
                                 value="{{ post.cover_picture if post.cover_picture != None else '' }}">
+                        </div>
+                        <div class="col-12 col-sm-4 col-lg-2 d-flex justify-content-center">
+                            {% if post.cover_picture %}
+                            <img src="{{ post.cover_picture }}" alt="cover picture" class="w-100 my-2">
+                            {% else %}
+                            <span>None</span>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="row">

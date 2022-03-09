@@ -73,3 +73,12 @@ function setEventListeners(cls, eventType, func) {
         }
     }
 }
+
+async function apiGetInfo(id, category){
+    data = await fetch(`/api/${category}/${id}`)
+    .then(resp => resp.json())
+    .then(data => {
+        return data
+    })
+    return data
+}
