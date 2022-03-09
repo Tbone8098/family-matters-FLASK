@@ -1,0 +1,16 @@
+<div class="row d-flex flex-row align-items-center my-2 bg__charcoal rounded-pill shadow">
+    <div class=" d-flex justify-content-center bg__pumpkin rounded-circle p-2 w-25">
+        {% if person.avatar %}
+        <img src="{{ person.avatar }}" alt="avatar">
+        {% else %}
+        {% if person.gender == 'female' %}
+        <img src="{{ url_for('static', filename='img/icon/girl.png') }}" alt="girl avatar" class="">
+        {% else %}
+        <img src="{{ url_for('static', filename='img/icon/guy.png') }}" alt="guy avatar" class="">
+        {% endif %}
+        {% endif %}
+    </div>
+    <div class="w-75 txt__olivine">
+        {{ person }}
+    </div>
+</div>
