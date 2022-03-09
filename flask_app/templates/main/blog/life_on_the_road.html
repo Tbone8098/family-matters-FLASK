@@ -33,11 +33,11 @@
                 </div>
                 <div class="col-12 col-sm-6 d-flex align-items-center">
                     <div>
-                        <div class="d-flex justify-content-between">
-                            <h3>{{ post.name }}</h3>
-                            <p>{{ post.posted_date }}</p>
+                        <h3>{{ post.name }}</h3>
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <p><strong>Author: </strong>{{ post.author }}</p>
+                            <p><strong>Posted on: </strong>{{ post.posted_date }}</p>
                         </div>
-                        <p><strong>Author:</strong> {{ post.author }}</p>
                         <p class="text-wrap w-100">{{ post.synopsis }}</p>  
                         <a class="btn bg__charcoal txt__sunglow" href="/post/{{ post.id }}">Read More</a>
                     </div>
