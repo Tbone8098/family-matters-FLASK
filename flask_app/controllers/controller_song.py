@@ -19,3 +19,12 @@ def add_song():
     model_playlist_has_songs.PlaylistsHasSong.create(**request.form)
     return redirect(f'/playlist/{playlist_id}/edit')
 
+@app.route('/api/song/<int:id>')
+def get_song(id):
+    song = model_song.Song.get_one(id=id)
+    song_serialized = song.serialize()
+    msg = {
+        'data': song_serialized
+    }
+    return jsonify(msg)
+

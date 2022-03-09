@@ -4,27 +4,32 @@
     <h1>{{ playlist.month.capitalize() }} {{ playlist.year }}</h1>
 </div>
 <div class="row">
-    <div class="col-10">
-        <div class="d-flex justify-content-between">
-            <h2>Current Songs In Playlist</h2>
-            <form action="/song/add" method="post" class="d-flex align-items-center gap-3">
-                <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
-                <div>
-                    <select name="song_id" id="song_id" class="form-select">
-                        {% for song in all_songs %}
+    <div class="col-12 col-lg-9">
+        <div class="row">
+            <div class="col-12">
+                <h2>Current Songs In Playlist</h2>
+            </div>
+                <form action="/song/add" method="post" class="">
+                    <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
+                    <div class="col-12">
+                        <select name="song_id" id="song_id" class="form-select">
+                            {% for song in all_songs %}
                             <option value="{{ song.id }}">{{ song.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button class="btn btn-success">Add Song</button>
-            </form>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 w-100 d-flex gap-1">
+                        <button class="btn btn-success w-75">Add Song</button>
+                        <span class="btn bg__olivine w-25 d-lg-none modal__trigger" modal_target="new__song">New Song</span>
+                    </div>
+                </form>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Artist</th>
-                    <th>Link</th>
+                    <th class="d-none d-sm-table-cell">Artist</th>
+                    <th class="d-none d-sm-table-cell">Link</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -32,18 +37,22 @@
                 {% for song in playlist.songs %}
                     <tr>
                         <td>{{ song.name }}</td>
-                        <td>{{ song.artist }}</td>
-                        <td>{{ song.link }}</td>
-                        <td class="w-25">
-                            <a class="btn bg__sunglow m-0" href="/song/{{song.id}}/edit">Edit</a>
-                            <a class="btn btn-danger m-0" href="/song/{{song.id}}/remove">Remove</a>
+                        <td class="d-none d-sm-table-cell">{{ song.artist }}</td>
+                        {% if song.link %}
+                        <td class="d-none d-sm-table-cell"><a href="{{ song.link }}">Link</a></td>
+                        {% else %}
+                        <td class="d-none d-sm-table-cell">None</td>
+                        {% endif %}
+                        <td class="d-flex flex-column flex-sm-row gap-1">
+                            <span class="btn bg__sunglow m-0 w-100 modal__trigger song-edit-btn" modal_target="edit__song" song_id="{{song.id}}" playlist_id="{{playlist.id}}">Edit</span>
+                            <a class="btn btn-danger m-0 w-100" href="/song/{{song.id}}/remove">Remove</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    <div class="col-2">
+    <div class="d-none d-lg-block col-lg-3">
         <div>
             <h2>Create a new Song</h2>
             <form action="/song/create" method="post">
@@ -60,9 +69,56 @@
                     <label for="link">YouTube Link</label>
                     <input class="form-control" type="text" name="link" id="link">
                 </div>
-                <button class="btn btn-success">Create Song</button>
+                <div class="w-100">
+                    <button class="btn btn-success w-100">Create Song</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+
+<div class="modal__wrapper d-none" modal_name="new__song">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine ">
+            <h2>New Song</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content">
+            <form action="/song/create" method="post">
+                <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
+                <div class="mb-3">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="artist">Artist</label>
+                    <input class="form-control" type="text" name="artist" id="artist">
+                </div>
+                <div class="mb-3">
+                    <label for="link">YouTube Link</label>
+                    <input class="form-control" type="text" name="link" id="link">
+                </div>
+                <div class="w-100">
+                    <button class="btn btn-success w-100">Create Song</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal__wrapper d-none" modal_name="edit__song">
+    <div class="modal__container">
+        <div class="modal__header txt__olivine ">
+            <h2>Edit Song</h2>
+            <span class="modal__close">Close</span>
+        </div>
+        <div class="modal__content">
+        </div>
+    </div>
+</div>
 {% endblock content %}
+
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/playlist.js') }}"></script>
+{% endblock js %}

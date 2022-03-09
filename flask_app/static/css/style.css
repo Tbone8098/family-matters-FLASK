@@ -86,7 +86,7 @@ li > a {
 }
 
 /* Positions */
-.p-relative {
+.p__relative {
     position: relative;
 }
 .p__sticky__top {

@@ -16,6 +16,7 @@ class Post(model_base.base_model):
         self.is_public = data['is_public']
         self.user_id = data['user_id']
         self.content = data['content']
+        self.posted_date = data['posted_date']
 
     @property
     def category(self):

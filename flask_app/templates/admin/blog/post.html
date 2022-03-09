@@ -8,7 +8,7 @@
         <button class="btn bg__sunglow txt__charcoal modal__trigger" modal_target="create__post">Create Post</button>
     </div>
     <div class="d-none d-sm-block">
-        <form class="d-flex justify-content-center align-items-center gap-3" action="/post/create" method="post">
+        <form class="d-flex justify-content-center align-items-center gap-3" action="/admin/post/create" method="post">
             <div>
                 <input class="form-control" type="text" name="name" id="name" placeholder="New Post">
             </div>
@@ -41,7 +41,7 @@
         <tbody id="post_table_body">
             {% for post in all_posts %}
             <tr>
-                <td><a class="no__a" href="/post/{{post.id}}/edit">{{ post.name }}</a></td>
+                <td><a class="no__a" href="/admin/post/{{post.id}}/edit">{{ post.name }}</a></td>
                 <td>{{ post.category.name }}</td>
                 <td class="d-none d-sm-table-cell">{{ post.author }}</td>
                 <td class="d-none d-sm-table-cell">{{ post.created_at }}</td>

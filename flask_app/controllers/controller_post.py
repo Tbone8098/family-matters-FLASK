@@ -5,7 +5,7 @@ from flask_app.config.helper_func import checkLogin
 
 from flask_app.models import model_post, model_category, model_page
 
-@app.route('/posts')  
+@app.route('/admin/posts')  
 @checkLogin        
 def post_new():
     session['page'] = 'Posts'
@@ -13,13 +13,13 @@ def post_new():
         'all_posts': model_post.Post.get_all(),
         'all_categories': model_category.Category.get_all()
     }
-    return render_template('admin/post.html', **context)
+    return render_template('admin/blog/post.html', **context)
 
-@app.route('/post/create', methods=['POST'])      
+@app.route('/admin/post/create', methods=['POST'])      
 @checkLogin    
 def post_create():
     id = model_post.Post.create(**request.form, user_id=session['uuid'])
-    return redirect(f'/post/{id}/edit')
+    return redirect(f'/admin/post/{id}/edit')
 
 @app.route('/post/<int:id>')  
 @checkLogin        
@@ -29,7 +29,7 @@ def post_show(id):
     }
     return render_template('main/post_show.html', **context)
 
-@app.route('/post/<int:id>/edit') 
+@app.route('/admin/post/<int:id>/edit') 
 @checkLogin         
 def post_edit(id):
     session['page'] = 'Edit Post'
@@ -37,9 +37,9 @@ def post_edit(id):
         'post': model_post.Post.get_one(id=id),
         'all_categories': model_category.Category.get_all()
     }
-    return render_template('admin/post_edit.html', **context)
+    return render_template('admin/blog/post_edit.html', **context)
 
-@app.route('/post/<int:id>/update', methods=['POST'])   
+@app.route('/admin/post/<int:id>/update', methods=['POST'])   
 @checkLogin       
 def post_update(id):
     data ={**request.form}
@@ -58,17 +58,17 @@ def post_update(id):
 
 
     model_post.Post.update_one(**data, id=id)
-    return redirect(f'/post/{id}/edit')
+    return redirect(f'/admin/post/{id}/edit')
 
-@app.route('/api/post/<int:id>/update', methods=['POST'])    
+@app.route('/admin/api/post/<int:id>/update', methods=['POST'])    
 @checkLogin      
 def api_post_update(id):
     data ={**request.form}
     model_post.Post.update_one(**data, id=id)
     return jsonify(msg='success')
 
-@app.route('/post/<int:id>/delete')          
+@app.route('/admin/post/<int:id>/delete')          
 @checkLogin
 def post_delete(id):
     model_post.Post.delete_one(id=id)
-    return redirect('/posts')
+    return redirect('/admin/posts')

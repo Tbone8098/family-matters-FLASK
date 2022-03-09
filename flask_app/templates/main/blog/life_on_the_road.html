@@ -33,9 +33,17 @@
                 </div>
                 <div class="col-12 col-sm-6 d-flex align-items-center">
                     <div>
+                        <div class="d-flex justify-content-between">
+                            <h3>{{ post.name }}</h3>
+                            <p>{{ post.posted_date }}</p>
+                        </div>
+                        <p><strong>Author:</strong> {{ post.author }}</p>
                         <p class="text-wrap w-100">{{ post.synopsis }}</p>  
                         <a class="btn bg__charcoal txt__sunglow" href="/post/{{ post.id }}">Read More</a>
                     </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <span>{{ loop.index }} / {{ all_featured_posts | length }}</span>
                 </div>
             </div>
         </div>
@@ -48,7 +56,7 @@
 </div>
 
 <div class="row mx-0 mt-5 d-flex justify-content-center">
-    <div class="col-11 ">
+    <div class="col-12 ">
         {% for category in all_categories %}
         {% if category.posts | length > 0 %}
         <div class="row text-center bg__charcoal txt__sunglow">
@@ -57,11 +65,14 @@
         <div class="row category__container mb-3">
             {% for post in category.posts %}
             {% if post.is_public %}
-            {% if loop.index < 5 %} <div class="post__container">
-                <a href="/post/{{post.id}}">
-                    <img src="{{ post.cover_picture }}">
-                </a>
-        </div>
+            {% if loop.index < 5 %} 
+            <div class="post__container">
+                <div class="post__img__container">
+                    <a href="/post/{{post.id}}">
+                        <img src="{{ post.cover_picture }}">
+                    </a>
+                </div>
+            </div>
         {% endif %}
         {% endif %}
         {% endfor %}
