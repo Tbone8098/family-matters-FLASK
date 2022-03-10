@@ -32,7 +32,7 @@ def create_page():
     id = model_page.Page.create(**data)
     return redirect(f'/page/{id}/edit') 
 
-@app.route('/admin/api/page/create', methods=['post'])
+@app.route('/api/admin/page/create', methods=['post'])
 @checkLogin
 def api_page_create():
     errors = model_page.Page.api_validation(request.form)

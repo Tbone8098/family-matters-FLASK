@@ -26,7 +26,7 @@ def create_category():
     model_category.Category.create(**request.form)
     return redirect('/categories') 
 
-@app.route('/admin/api/category/create', methods=['post'])
+@app.route('/api/admin/category/create', methods=['post'])
 @checkLogin
 def api_create_category():
     errors = model_category.Category.api_validation(request.form)

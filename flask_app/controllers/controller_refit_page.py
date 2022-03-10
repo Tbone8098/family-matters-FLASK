@@ -4,7 +4,7 @@ from flask_app.config.helper_func import checkLogin
 from flask_app.models import model_refit_page, model_playlist
 
 
-@app.route('/refit_page')
+@app.route('/admin/refit_page')
 @checkLogin
 def new_refit_page():
     page = model_refit_page.RefitPage.get_all()

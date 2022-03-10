@@ -3,7 +3,7 @@ from flask_app import app
 from flask import render_template, redirect, session, request, jsonify
 from flask_app.config.helper_func import checkLogin
 
-from flask_app.models import model_post, model_category, model_page
+from flask_app.models import model_post, model_category, model_page, model_people
 
 @app.route('/admin/posts')  
 @checkLogin        
@@ -22,7 +22,6 @@ def post_create():
     return redirect(f'/admin/post/{id}/edit')
 
 @app.route('/post/<int:id>')  
-@checkLogin        
 def post_show(id):
     context = {
         'post': model_post.Post.get_one(id=id),
@@ -35,7 +34,8 @@ def post_edit(id):
     session['page'] = 'Edit Post'
     context = {
         'post': model_post.Post.get_one(id=id),
-        'all_categories': model_category.Category.get_all()
+        'all_categories': model_category.Category.get_all(),
+        'all_people': model_people.Person.get_all(),
     }
     return render_template('admin/blog/post_edit.html', **context)
 

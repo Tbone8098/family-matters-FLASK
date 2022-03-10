@@ -11,17 +11,26 @@
 
 {% block content %}
     <div class="row mt-3 d-flex justify-content-center">
+        <div class="col-md-2">
+            <h2>People Mentioned</h2>
+            {% for person in post.people %}
+                {% include 'components/people_icon.html' %}
+            {% endfor %}
+        </div>
         <div class="col-12 col-sm-10 col-md-8 border border-black post__container">
             <div class="mt-3">
-                <h1 class="text-center">{{ post.name }}</h1>
+                <div>
+                    <h1 class="text-center">{{ post.name }}</h1>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <span><strong>Author: </strong>{{ post.author }}</span>
+                        <span><strong>Posted Date: </strong>{{ post.posted_date }}</span>
+                    </div>
+                </div>
                 {{ post.content | safe }}
             </div>
         </div>
+        <div class="col-md-2">
+            
+        </div>
     </div>
 {% endblock content %}
-
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae, voluptate dolor itaque libero amet officia ipsum
-quod iusto ullam veniam tempora corrupti quasi beatae quis quaerat, facere, omnis quidem?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestiae, voluptate dolor itaque libero amet officia ipsum
-quod iusto ullam veniam tempora corrupti quasi beatae quis quaerat, facere, omnis quidem?

@@ -1,6 +1,7 @@
+from unittest import result
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import model_base, model_user, model_page, model_category
+from flask_app.models import model_base, model_user, model_category, model_people
 from flask_app import DATABASE_SCHEMA
 import re
 
@@ -25,3 +26,15 @@ class Post(model_base.base_model):
     @property
     def author(self):
         return model_user.User.get_one(id=self.user_id)
+
+    @property
+    def people(self):
+        query = f"SELECT * FROM people JOIN post_has_people ON people.id = post_has_people.people_id WHERE post_has_people.post_id = {self.id};"
+        results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
+        print(results)
+        if results:
+            all_people = []
+            for person in results:
+                all_people.append(model_people.Person(person))
+            return all_people
+        return []
