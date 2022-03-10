@@ -22,7 +22,6 @@ def post_create():
     return redirect(f'/admin/post/{id}/edit')
 
 @app.route('/post/<int:id>')  
-@checkLogin        
 def post_show(id):
     context = {
         'post': model_post.Post.get_one(id=id),

@@ -27,8 +27,10 @@ def join_people_to_post():
 
 @app.route('/people/<int:id>')
 def show_people(id):
-    
-    return 'a person page'
+    context = {
+        'person': model_people.Person.get_one(id=id)
+    }
+    return render_template('/main/blog/people.html', **context)
 
 @app.route('/admin/people/<int:id>/edit')
 @checkLogin
