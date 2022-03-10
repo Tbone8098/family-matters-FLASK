@@ -15,8 +15,6 @@ class RefitPage(model_base.base_model):
         self.about_me_picture = data['about_me_picture']
         self.user_id = data['user_id']
         self.playlist_id = data['playlist_id']
-        self.loc_picture = data['loc_picture']
-        self.zoom_picture = data['zoom_picture']
         self.banner1_picture = data['banner1_picture']
         self.banner2_picture = data['banner2_picture']
 
