@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, session, flash, jsonify
 from flask_app.config.helper_func import checkLogin
 from flask_app.models import model_playlist, model_song
 
-@app.route('/refit/page/playlist')
+@app.route('/admin/refit/page/playlist')
 @checkLogin
 def refit_playlist():
     months = ['january', 'feburary', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'octuber', 'november', 'december']
