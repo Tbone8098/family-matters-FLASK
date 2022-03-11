@@ -1,6 +1,6 @@
 {% extends 'admin/base.html' %}
 {% block content %}
-<form action="/refit_page/{{page.id}}/update" method="post">
+<form action="/admin/refit_page/{{page.id}}/update" method="post">
     <div class="row">
         <div class="col-12 d-flex justify-content-between px-3">
             <h1>Page</h1>
@@ -22,35 +22,100 @@
             </select>
         </div>
         <div class="col-12 col-sm-4">
-            <label for="loc_picture">Square Picture</label>
-            <input class="form-control" type="text" name="loc_picture" id="loc_picture" value="{{ page.loc_picture if page.loc_picture != None else '' }}">
-            <label for="zoom_picture">Zoom Picture</label>
-            <input class="form-control" type="text" name="zoom_picture" id="zoom_picture" value="{{ page.zoom_picture if page.zoom_picture != None else '' }}">
-        </div>
-        <div class="col-12 col-sm-4">
             <label for="banner1_picture">Banner 1 Picture</label>
-            <input class="form-control" type="text" name="banner1_picture" id="banner1_picture" value="{{ page.banner1_picture if page.banner1_picture != None else '' }}">
+            <input class="form-control" type="text" name="banner1_picture" id="banner1_picture"
+                value="{{ page.banner1_picture if page.banner1_picture != None else '' }}">
             <label for="banner2_picture">Banner 2 Picture</label>
-            <input class="form-control" type="text" name="banner2_picture" id="banner2_picture" value="{{ page.banner2_picture if page.banner2_picture != None else '' }}">
+            <input class="form-control" type="text" name="banner2_picture" id="banner2_picture"
+                value="{{ page.banner2_picture if page.banner2_picture != None else '' }}">
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 mt-3">
             <h2 class="text-center">Schedule</h2>
-            <textarea name="schedule" id="schedule" cols="30" rows="10"
-            class="summernote">{{ page.schedule if page.schedule != None else '' }}</textarea>
+            <textarea name="schedule" id="schedule" cols="30" rows="10" class="summernote">
+            {% if page.schedule %}
+                {{ page.schedule }}
+            {% else %}
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th><strong>Day</strong></th>
+                            <th><strong>Time</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>Monday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+            </textarea>
         </div>
         <div class="col-12 col-lg-6 mt-3">
             <h2 class="text-center">Location</h2>
-            <textarea name="loc" id="loc" cols="30" rows="10"
-            class="summernote">{{ page.loc if page.loc != None else '' }}</textarea>
+            <textarea name="loc" id="loc" cols="30" rows="10" class="summernote">
+                {% if page.loc %}
+                    {{ page.loc }}
+                {% else %}
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 border border-1">
+                        item 1
+                    </div>
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 border border-1">
+                        item 2
+                    </div>
+                </div>
+                <div class="row d-flex flex-column-reverse flex-sm-row justify-content-center">
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 border border-1">
+                        item 3
+                    </div>
+                    <div class="col-12 col-sm-5 col-md-4 col-lg-3 border border-1">
+                        item 4
+                    </div>  
+                </div>
+                {% endif %}
+            </textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-lg-6 mt-3">
-            <h2 class="text-center">News Update</h2>
+            <div class="d-flex justify-content-evenly">
+                <h2 class="text-center">News Update</h2>
+                <span class="btn bg__refit__yellow border border-1" id="news_reset_btn">Clear</span>
+            </div>
             <textarea name="news" id="news" cols="30" rows="3"
-                class="summernote">{{ page.news if page.news != None else '' }}</textarea>
+                class="summernote">
+                {% if page.news %}
+                    {{ page.news }}
+                {% endif %}
+            </textarea>
         </div>
         <div class="col-12 col-lg-6 mt-3">
             <div class="d-flex justify-content-between align-items-center px-3">
@@ -65,3 +130,7 @@
     </div>
 </form>
 {% endblock content %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/refit.js') }}"></script>
+{% endblock js %}

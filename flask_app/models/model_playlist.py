@@ -11,6 +11,7 @@ class Playlist(model_base.base_model):
         self.month = data['month']
         self.year = data['year']
         self.user_id = data['user_id']
+        self.spotify_url = data['spotify_url']
 
     def __repr__(self) -> str:
         return f"{self.month.capitalize()} {self.year}"

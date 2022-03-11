@@ -19,7 +19,7 @@ def new_refit_page():
     }
     return render_template('admin/refit/refit_page.html', **context)
 
-@app.route('/refit_page/<int:id>/update', methods=['post'])
+@app.route('/admin/refit_page/<int:id>/update', methods=['post'])
 @checkLogin
 def update_refit_page(id):
     data = {
@@ -27,4 +27,4 @@ def update_refit_page(id):
     }
     del data['files']
     model_refit_page.RefitPage.update_one(id=id, **data)
-    return redirect('/refit_page')
+    return redirect('/admin/refit_page')
