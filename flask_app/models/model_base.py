@@ -8,8 +8,8 @@ class base_model:
         self.id = data['id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        # self.update = lambda **data : self.__class__.update(**data,id=self.id)
-        # self.delete = lambda **data : self.__class__.delete(**data,id=self.id)
+        self.update = lambda **data : self.__class__.update_one(**data,id=self.id)
+        self.delete = lambda **data : self.__class__.delete_one(**data,id=self.id)
 
     def serialize(self):
         return_dict = {}
@@ -90,7 +90,7 @@ class base_model:
 
     @classmethod
     def get_one(cls, **data):
-        str = cls.sanitize(**data, paired=True)
+        str = cls.sanitize(**data, paired=True, is_where=True)
         query = f'SELECT * FROM {cls.table} WHERE {str};'
         results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
         if results:

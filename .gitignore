@@ -132,3 +132,6 @@ dmypy.json
 
 flask_app/__init__.py
 flask_app/config/mysqlconnection.py
+sql_database_builder.txt
+temp.txt
+sql_database_builder.txt

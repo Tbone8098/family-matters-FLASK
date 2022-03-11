@@ -16,6 +16,7 @@
                     <option value="{{ 2022 + indx}}">{{ 2022 + indx}}</option>
                 {% endfor %}
             </select>
+            <input class="form-control" type="text" name="spotify_url" id="spotify_url" placeholder="Spotify URL">
             <button class="btn btn-success m-0">Create</button>
         </div>
     </form>
@@ -35,8 +36,8 @@
                 <td>{{ list.month }}</td>
                 <td>{{ list.year }}</td>
                 <td>
-                    <a class="btn bg__pine" href="/playlist/{{ list.id }}/edit">Edit</a>
-                    <a class="btn btn-danger" href="/playlist/{{ list.id }}/delete">Delete</a>
+                    <a class="btn bg__pine" href="/admin/playlist/{{ list.id }}/edit">Edit</a>
+                    <a class="btn btn-danger" href="/admin/playlist/{{ list.id }}/delete">Delete</a>
                 </td>
             </tr>
             {% endfor %}

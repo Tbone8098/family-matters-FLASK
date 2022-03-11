@@ -1,25 +1,22 @@
--- MySQL Workbench Forward Engineering
+-- ----------------------------------------------------------------------------
+-- MySQL Workbench Migration
+-- Migrated Schemata: s3p5x7kb9czupn46
+-- Source Schemata: s3p5x7kb9czupn46
+-- Created: Thu Mar 10 18:47:48 2022
+-- Workbench Version: 8.0.27
+-- ----------------------------------------------------------------------------
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET FOREIGN_KEY_CHECKS = 0;
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Schema s3p5x7kb9czupn46
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+DROP SCHEMA IF EXISTS `s3p5x7kb9czupn46` ;
+CREATE SCHEMA IF NOT EXISTS `s3p5x7kb9czupn46` ;
 
--- -----------------------------------------------------
--- Schema s3p5x7kb9czupn46
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `s3p5x7kb9czupn46` DEFAULT CHARACTER SET utf8 ;
-USE `s3p5x7kb9czupn46` ;
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`categories`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.categories
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
@@ -30,28 +27,9 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 19
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NULL DEFAULT NULL,
-  `last_name` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(45) NULL DEFAULT NULL,
-  `pw` CHAR(60) NULL DEFAULT NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_verified` TINYINT NULL DEFAULT '0',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`pages`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.pages
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`pages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
@@ -72,10 +50,9 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 12
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`people`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.people
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`people` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NULL DEFAULT NULL,
@@ -89,10 +66,9 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`playlists`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.playlists
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`playlists` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `month` VARCHAR(45) NULL DEFAULT NULL,
@@ -100,42 +76,19 @@ CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`playlists` (
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` INT NOT NULL,
+  `spotify_url` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_playlists_users1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_playlists_users1`
     FOREIGN KEY (`user_id`)
     REFERENCES `s3p5x7kb9czupn46`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`songs`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`songs` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `artist` VARCHAR(45) NULL DEFAULT NULL,
-  `link` VARCHAR(255) NULL DEFAULT NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_songs_users1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_songs_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `s3p5x7kb9czupn46`.`users` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
-ENGINE = InnoDB
-AUTO_INCREMENT = 40
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`playlists_has_songs`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.playlists_has_songs
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`playlists_has_songs` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `playlist_id` INT NOT NULL,
@@ -148,52 +101,19 @@ CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`playlists_has_songs` (
   INDEX `fk_playlists_has_songs_playlists1_idx` (`playlist_id` ASC) VISIBLE,
   CONSTRAINT `fk_playlists_has_songs_playlists1`
     FOREIGN KEY (`playlist_id`)
-    REFERENCES `s3p5x7kb9czupn46`.`playlists` (`id`),
+    REFERENCES `s3p5x7kb9czupn46`.`playlists` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_playlists_has_songs_songs1`
     FOREIGN KEY (`song_id`)
     REFERENCES `s3p5x7kb9czupn46`.`songs` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 20
+AUTO_INCREMENT = 30
 DEFAULT CHARACTER SET = utf8mb3;
 
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`posts`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`posts` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `category_id` INT NOT NULL,
-  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_featured` TINYINT NULL DEFAULT '0',
-  `cover_picture` VARCHAR(255) NULL DEFAULT NULL,
-  `synopsis` VARCHAR(255) NULL DEFAULT NULL,
-  `user_id` INT NOT NULL,
-  `content` LONGTEXT NULL DEFAULT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `is_public` TINYINT NULL DEFAULT '0',
-  `posted_date` DATE NULL DEFAULT curdate(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_pages_has_categories_categories1_idx` (`category_id` ASC) VISIBLE,
-  INDEX `fk_posts_users1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_pages_has_categories_categories1`
-    FOREIGN KEY (`category_id`)
-    REFERENCES `s3p5x7kb9czupn46`.`categories` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_posts_users1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `s3p5x7kb9czupn46`.`users` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 29
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`post_has_people`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.post_has_people
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`post_has_people` (
   `people_id` INT NOT NULL,
   `post_id` INT NOT NULL,
@@ -213,10 +133,42 @@ CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`post_has_people` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.posts
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`posts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category_id` INT NOT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_featured` TINYINT NULL DEFAULT '0',
+  `cover_picture` VARCHAR(255) NULL DEFAULT NULL,
+  `synopsis` VARCHAR(255) NULL DEFAULT NULL,
+  `user_id` INT NOT NULL,
+  `content` LONGTEXT NULL DEFAULT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `is_public` TINYINT NULL DEFAULT '0',
+  `posted_date` DATE NULL DEFAULT (curdate()),
+  PRIMARY KEY (`id`),
+  INDEX `fk_pages_has_categories_categories1_idx` (`category_id` ASC) VISIBLE,
+  INDEX `fk_posts_users1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_pages_has_categories_categories1`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `s3p5x7kb9czupn46`.`categories` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_posts_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `s3p5x7kb9czupn46`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 29
+DEFAULT CHARACTER SET = utf8mb3;
 
--- -----------------------------------------------------
--- Table `s3p5x7kb9czupn46`.`refit_pages`
--- -----------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.refit_pages
+-- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`refit_pages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `news` TEXT NULL DEFAULT NULL,
@@ -235,17 +187,52 @@ CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`refit_pages` (
   INDEX `fk_refit_page_playlists1_idx` (`playlist_id` ASC) VISIBLE,
   CONSTRAINT `fk_refit_page_playlists1`
     FOREIGN KEY (`playlist_id`)
-    REFERENCES `s3p5x7kb9czupn46`.`playlists` (`id`),
+    REFERENCES `s3p5x7kb9czupn46`.`playlists` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
   CONSTRAINT `fk_refit_page_users1`
     FOREIGN KEY (`user_id`)
     REFERENCES `s3p5x7kb9czupn46`.`users` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb3;
 
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.songs
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`songs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `artist` VARCHAR(45) NULL DEFAULT NULL,
+  `link` VARCHAR(255) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_songs_users1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_songs_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `s3p5x7kb9czupn46`.`users` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT)
+ENGINE = InnoDB
+AUTO_INCREMENT = 40
+DEFAULT CHARACTER SET = utf8mb3;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
+-- ----------------------------------------------------------------------------
+-- Table s3p5x7kb9czupn46.users
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `s3p5x7kb9czupn46`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL DEFAULT NULL,
+  `last_name` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `pw` CHAR(60) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_verified` TINYINT NULL DEFAULT '0',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8mb3;
+SET FOREIGN_KEY_CHECKS = 1;

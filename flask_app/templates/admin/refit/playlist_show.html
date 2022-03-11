@@ -1,7 +1,20 @@
 {% extends 'admin/base.html' %}
 {% block content %}
-<div class="row">
-    <h1>{{ playlist.month.capitalize() }} {{ playlist.year }}</h1>
+<div class="row d-flex align-items-center">
+    <div class="col-6">
+        <h1>{{ playlist.month.capitalize() }} {{ playlist.year }}</h1>
+    </div>
+    <div class="col-6">
+        <form class="d-flex align-items-end w-100 gap-2" action="/admin/refit/playlist/{{playlist.id}}/update" method="post">
+            <div class="w-75">
+                <label for="spotify_url">Spotify</label>
+                <input class="form-control" type="text" name="spotify_url" id="spotify_url" value="{{ playlist.spotify_url }}">
+            </div>
+            <div class="w-25">
+                <button class="btn bg__pine w-100 mb-0">Update</button>
+            </div>
+        </form>
+    </div>
 </div>
 <div class="row">
     <div class="col-12 col-lg-9">
@@ -9,16 +22,16 @@
             <div class="col-12">
                 <h2>Current Songs In Playlist</h2>
             </div>
-                <form action="/song/add" method="post" class="">
+                <form action="/admin/song/add" method="post" class="row d-flex align-items-center">
                     <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
-                    <div class="col-12">
+                    <div class="col-12 col-md-8">
                         <select name="song_id" id="song_id" class="form-select">
                             {% for song in all_songs %}
                             <option value="{{ song.id }}">{{ song.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col-12 w-100 d-flex gap-1">
+                    <div class="col-12 col-md-4 d-flex gap-1">
                         <button class="btn btn-success w-75">Add Song</button>
                         <span class="btn bg__olivine w-25 d-lg-none modal__trigger" modal_target="new__song">New Song</span>
                     </div>
@@ -45,7 +58,7 @@
                         {% endif %}
                         <td class="d-flex flex-column flex-sm-row gap-1">
                             <span class="btn bg__sunglow m-0 w-100 modal__trigger song-edit-btn" modal_target="edit__song" song_id="{{song.id}}" playlist_id="{{playlist.id}}">Edit</span>
-                            <a class="btn btn-danger m-0 w-100" href="/song/{{song.id}}/remove">Remove</a>
+                            <a class="btn btn-danger m-0 w-100" href="/admin/song/{{song.id}}/{{ playlist.id }}/remove">Remove</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -55,7 +68,7 @@
     <div class="d-none d-lg-block col-lg-3">
         <div>
             <h2>Create a new Song</h2>
-            <form action="/song/create" method="post">
+            <form action="/admin/song/create" method="post">
                 <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
                 <div class="mb-3">
                     <label for="name">Name</label>
@@ -84,7 +97,7 @@
             <span class="modal__close">Close</span>
         </div>
         <div class="modal__content">
-            <form action="/song/create" method="post">
+            <form action="/admin/song/create" method="post">
                 <input type="hidden" name="playlist_id" id="playlist_id" value="{{ playlist.id }}">
                 <div class="mb-3">
                     <label for="name">Name</label>
