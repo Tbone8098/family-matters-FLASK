@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="row bg__refit__blue mt-3">
-    <h2 class="txt__white text-center w-100">Kendal's Class</h2>
+    <h2 class="txt__white text-center w-100" id="schedule">Kendal's Class</h2>
 </div>
 <div class="row d-flex justify-content-center mt-3">
     {% if page.news %}
@@ -64,9 +64,13 @@
     {% endif %}
 </div>
 {% if page.playlist %}
+<div class="row d-flex justify-content-center">
+    .col-
+    <p>Previous Playlists</p>
+</div>
 <div class="row d-flex justify-content-center mt-3">
     <div class="col-12 col-sm-8 col-md-6 px-0">
-        <h3 class="text-center">{{ page.playlist.month }} Playlist</h3>
+        <h3 class="text-center">{{ page.playlist.month.capitalize() }} Playlist</h3>
         <!-- TODO add a dropdown for all the other playlists -->
         <table class="table">
             <thead>
@@ -82,7 +86,7 @@
                     <td>{{ song.name }}</td>
                     <td>{{ song.artist }}</td>
                     {% if song.link %}
-                    <td><a href="{{ song.link }}">Link</a></td>
+                    <td><a href="{{ song.link }}" target="_blank">Link</a></td>
                     {% else %}
                     <td>Coming Soon</td>
                     {% endif %}
